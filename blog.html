@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Blog | Çanta İncelemeleri ve Rehberler</title>
+    <meta name="description" content="Premium sırt çantası ve sling bag incelemeleri. Aer, Peak Design, Bellroy, GORUCK detaylı inceleme ve karşılaştırma yazıları.">
+    <meta name="keywords" content="çanta inceleme, backpack review, sırt çantası değerlendirme, peak design inceleme, aer review, bellroy inceleme">
+    <meta name="author" content="Kraftcover">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://cantaloji.com/blog">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cantaloji.com/blog">
+    <meta property="og:title" content="Blog | Çanta İncelemeleri ve Rehberler">
+    <meta property="og:description" content="Premium sırt çantası ve sling bag incelemeleri.">
+    <meta property="og:locale" content="tr_TR">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎒</text></svg>">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #fafafa;
+            --card-bg: #ffffff;
+            --text: #1a1a1a;
+            --text-secondary: #6b6b6b;
+            --border: #e5e5e5;
+            --accent: #000000;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .logo span {
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--text);
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Categories */
+        .categories {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 2rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            background: var(--card-bg);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Blog Card */
+        .blog-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .blog-card:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+        }
+
+        .blog-card-image {
+            aspect-ratio: 16/9;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .blog-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .blog-card:hover .blog-card-image img {
+            transform: scale(1.05);
+        }
+
+        .blog-card-body {
+            padding: 1.5rem;
+        }
+
+        .blog-card-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .blog-card-category {
+            background: var(--bg);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .blog-card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .blog-card-excerpt {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Featured Post */
+        .featured {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+        }
+
+        .featured-card {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .featured-card:hover {
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        .featured-image {
+            background: #f0f0f0;
+            min-height: 300px;
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-content {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .featured-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .featured-excerpt {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .featured-meta {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .featured-card { grid-template-columns: 1fr; }
+            .featured-image { min-height: 200px; }
+            .blog-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2rem; }
+            nav { gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="index.html" class="logo">Çantaloji <span>/ Blog</span></a>
+        <nav>
+            <a href="index.html">Veritabanı</a>
+            <a href="blog.html" class="active">Blog</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <h1>Blog</h1>
+    <p>Çanta incelemeleri, karşılaştırmalar ve satın alma rehberleri</p>
+</section>
+
+<div class="categories">
+    <button class="category-btn active" data-cat="all">Tümü</button>
+    <button class="category-btn" data-cat="inceleme">İnceleme</button>
+    <button class="category-btn" data-cat="karsilastirma">Karşılaştırma</button>
+    <button class="category-btn" data-cat="rehber">Rehber</button>
+    <button class="category-btn" data-cat="haber">Haber</button>
+</div>
+
+<!-- Featured Post -->
+<section class="featured">
+    <a href="#" class="featured-card">
+        <div class="featured-image">
+            <img src="https://aersf.com/cdn/shop/files/AER-31011_City_Pack_Pro_2_Black_hero.jpg?v=1699401584&width=1200" alt="Aer City Pack Pro 2">
+        </div>
+        <div class="featured-content">
+            <div class="featured-label">Öne Çıkan</div>
+            <h2 class="featured-title">Aer City Pack Pro 2: 6 Ay Kullanım Sonrası</h2>
+            <p class="featured-excerpt">Aer'in en popüler şehir çantasını 6 ay boyunca günlük kullandım. İşte tüm artıları, eksileri ve kimin için ideal olduğu...</p>
+            <div class="featured-meta">15 Ocak 2026 · 8 dk okuma</div>
+        </div>
+    </a>
+</section>
+
+<!-- Blog Grid -->
+<div class="blog-grid" id="blogGrid">
+
+    <a href="#" class="blog-card" data-category="inceleme">
+        <div class="blog-card-image">
+            <img src="https://cdn.shopify.com/s/files/1/0086/8155/products/BEDB-20-BK-2_1800x1800.jpg" alt="Peak Design Everyday Backpack">
+        </div>
+        <div class="blog-card-body">
+            <div class="blog-card-meta">
+                <span class="blog-card-category">İnceleme</span>
+                <span>12 Ocak 2026</span>
+            </div>
+            <h3 class="blog-card-title">Peak Design Everyday Backpack V2 İnceleme</h3>
+            <p class="blog-card-excerpt">Fotoğrafçıların favorisi, ama günlük kullanım için de ideal mi? Detaylı incelememiz...</p>
+        </div>
+    </a>
+
+    <a href="#" class="blog-card" data-category="karsilastirma">
+        <div class="blog-card-image">
+            <img src="https://bellroy.imgix.net/product/classic-backpack/black/gallery_1.jpg?w=800" alt="Bellroy vs Aer">
+        </div>
+        <div class="blog-card-body">
+            <div class="blog-card-meta">
+                <span class="blog-card-category">Karşılaştırma</span>
+                <span>10 Ocak 2026</span>
+            </div>
+            <h3 class="blog-card-title">Bellroy vs Aer: Hangisi Daha İyi?</h3>
+            <p class="blog-card-excerpt">İki premium marka karşı karşıya. Tasarım, malzeme, fiyat ve kullanım açısından karşılaştırma...</p>
+        </div>
+    </a>
+
+    <a href="#" class="blog-card" data-category="rehber">
+        <div class="blog-card-image">
+            <img src="https://evergoods.us/cdn/shop/files/CHZ22-Black-1.jpg?v=1699888888&width=800" alt="EDC Çanta Rehberi">
+        </div>
+        <div class="blog-card-body">
+            <div class="blog-card-meta">
+                <span class="blog-card-category">Rehber</span>
+                <span>8 Ocak 2026</span>
+            </div>
+            <h3 class="blog-card-title">2026 EDC Çanta Rehberi: Nasıl Seçilir?</h3>
+            <p class="blog-card-excerpt">Günlük taşıma için ideal çantayı seçerken dikkat etmeniz gereken 10 kriter...</p>
+        </div>
+    </a>
+
+    <a href="#" class="blog-card" data-category="inceleme">
+        <div class="blog-card-image">
+            <img src="https://www.goruck.com/cdn/shop/files/GR1-21L-Black-1.jpg?v=1699888888&width=800" alt="GORUCK GR1">
+        </div>
+        <div class="blog-card-body">
+            <div class="blog-card-meta">
+                <span class="blog-card-category">İnceleme</span>
+                <span>5 Ocak 2026</span>
+            </div>
+            <h3 class="blog-card-title">GORUCK GR1: Askeri Dayanıklılık Test</h3>
+            <p class="blog-card-excerpt">1000D Cordura, YKK fermuarlar ve SCARS garantisi. Bu çanta gerçekten ömür boyu dayanır mı?</p>
+        </div>
+    </a>
+
+    <a href="#" class="blog-card" data-category="karsilastirma">
+        <div class="blog-card-image">
+            <img src="https://aersf.com/cdn/shop/files/AER-11012_Day_Sling_3_Black_hero.jpg?v=1699401584&width=800" alt="Sling Karşılaştırma">
+        </div>
+        <div class="blog-card-body">
+            <div class="blog-card-meta">
+                <span class="blog-card-category">Karşılaştırma</span>
+                <span>3 Ocak 2026</span>
+            </div>
+            <h3 class="blog-card-title">En İyi 5 Sling Bag: 2026 Karşılaştırması</h3>
+            <p class="blog-card-excerpt">Aer, Chrome, Bellroy, Peak Design ve Evergoods sling'leri karşı karşıya...</p>
+        </div>
+    </a>
+
+    <a href="#" class="blog-card" data-category="inceleme">
+        <div class="blog-card-image">
+            <img src="https://kraftcover.shop/cdn/shop/files/DSC07638-min.jpg?v=1699888888&width=800" alt="Kraftcover All City">
+        </div>
+        <div class="blog-card-body">
+            <div class="blog-card-meta">
+                <span class="blog-card-category">İnceleme</span>
+                <span>1 Ocak 2026</span>
+            </div>
+            <h3 class="blog-card-title">Kraftcover All City BackPack: Türk Tasarımı</h3>
+            <p class="blog-card-excerpt">Yerli üretim, %100 Ripstop ve ömür boyu garanti. Türkiye'den dünyaya açılan marka...</p>
+        </div>
+    </a>
+
+    <a href="#" class="blog-card" data-category="rehber">
+        <div class="blog-card-image">
+            <img src="https://cdn.shopify.com/s/files/1/0281/3581/products/ALLPA-35L-BLK-1.jpg?v=1699888888&width=800" alt="Seyahat Çantası">
+        </div>
+        <div class="blog-card-body">
+            <div class="blog-card-meta">
+                <span class="blog-card-category">Rehber</span>
+                <span>28 Aralık 2025</span>
+            </div>
+            <h3 class="blog-card-title">Tek Çantayla Seyahat: One Bag Travel Rehberi</h3>
+            <p class="blog-card-excerpt">30-45L arası çantalarla dünyayı dolaşmak. Minimalist seyahatin püf noktaları...</p>
+        </div>
+    </a>
+
+    <a href="#" class="blog-card" data-category="haber">
+        <div class="blog-card-image">
+            <img src="https://arcteryx.com/cdn/shop/files/Mantis-26-Black-1.jpg?v=1699888888&width=800" alt="Arc'teryx Yeni Model">
+        </div>
+        <div class="blog-card-body">
+            <div class="blog-card-meta">
+                <span class="blog-card-category">Haber</span>
+                <span>25 Aralık 2025</span>
+            </div>
+            <h3 class="blog-card-title">Arc'teryx 2026 Koleksiyonu Duyuruldu</h3>
+            <p class="blog-card-excerpt">Kanadalı outdoor markasından yeni Mantis ve Granville modelleri geliyor...</p>
+        </div>
+    </a>
+
+</div>
+
+<footer>
+    <p><a href="index.html">Bag Database</a> · <a href="https://kraftcover.shop" target="_blank">Kraftcover</a> tarafından desteklenmektedir.</p>
+</footer>
+
+<script>
+// Category Filter
+document.querySelectorAll('.category-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const cat = btn.dataset.cat;
+        document.querySelectorAll('.blog-card').forEach(card => {
+            if (cat === 'all' || card.dataset.category === cat) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Çanta Veritabanı | 50+ Premium Sırt Çantası ve Sling Karşılaştırma</title>
+    <meta name="description" content="Aer, Peak Design, Bellroy, GORUCK, Evergoods ve daha fazla premium çanta markasını karşılaştırın. Hacim, fiyat, malzeme ve özellik bazlı filtreleme ile ideal çantanızı bulun.">
+    <meta name="keywords" content="sırt çantası, backpack, sling bag, edc çanta, peak design, aer, bellroy, goruck, evergoods, çanta karşılaştırma, laptop çantası, seyahat çantası">
+    <meta name="author" content="Kraftcover">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://cantaloji.com">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cantaloji.com">
+    <meta property="og:title" content="Çanta Veritabanı | Premium Sırt Çantası ve Sling Karşılaştırma">
+    <meta property="og:description" content="50+ premium çanta markasını tek sayfada karşılaştırın. Aer, Peak Design, Bellroy, GORUCK ve daha fazlası.">
+    <meta property="og:image" content="https://cantaloji.com/og-image.jpg">
+    <meta property="og:locale" content="tr_TR">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://cantaloji.com">
+    <meta name="twitter:title" content="Çanta Veritabanı | Premium Sırt Çantası Karşılaştırma">
+    <meta name="twitter:description" content="50+ premium çanta markasını tek sayfada karşılaştırın.">
+    <meta name="twitter:image" content="https://cantaloji.com/og-image.jpg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Çanta Veritabanı",
+        "description": "Premium sırt çantası ve sling bag karşılaştırma platformu",
+        "url": "https://cantaloji.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://cantaloji.com?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎒</text></svg>">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #fafafa;
+            --card-bg: #ffffff;
+            --text: #1a1a1a;
+            --text-secondary: #6b6b6b;
+            --border: #e5e5e5;
+            --accent: #000000;
+            --turkish: #e30a17;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        /* Header - Peak Design Style */
+        header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .logo span {
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        /* Search */
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: var(--bg);
+            transition: all 0.2s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: var(--card-bg);
+        }
+
+        .search-box::before {
+            content: "⌕";
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .header-stats {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .header-stats strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* Filters */
+        .filters {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+
+        .filters-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            background: var(--card-bg);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--text-secondary);
+            color: var(--text);
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .filter-select {
+            padding: 0.5rem 2rem 0.5rem 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--card-bg);
+            font-size: 0.8rem;
+            color: var(--text);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%236b6b6b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.6rem center;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .filter-divider {
+            width: 1px;
+            height: 24px;
+            background: var(--border);
+            margin: 0 0.5rem;
+        }
+
+        /* Main Grid */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Card - Clean & Minimal */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+        }
+
+        .card-image {
+            aspect-ratio: 4/3;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-image .placeholder {
+            font-size: 3rem;
+            opacity: 0.2;
+        }
+
+        /* Turkish Brand Badge - Subtle */
+        .card.turkish .card-image::after {
+            content: "TR";
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--turkish);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .card-body {
+            padding: 1.25rem;
+        }
+
+        .card-brand {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+
+        .card-specs {
+            display: flex;
+            gap: 0.75rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .card-specs span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .card-price {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .card-origin {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* Load More */
+        .load-more-container {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .load-more {
+            padding: 0.875rem 2.5rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .load-more:hover {
+            background: #333;
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            background: var(--card-bg);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow: hidden;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: rgba(0,0,0,0.1);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.25rem;
+            z-index: 10;
+            transition: background 0.2s;
+        }
+
+        .modal-close:hover {
+            background: rgba(0,0,0,0.2);
+        }
+
+        .modal-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-height: 90vh;
+        }
+
+        .modal-image {
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-image .placeholder {
+            font-size: 5rem;
+            opacity: 0.2;
+        }
+
+        .modal-details {
+            padding: 2rem;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        .modal-brand {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .modal-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section-title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .spec-item {
+            background: var(--bg);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+        }
+
+        .spec-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .spec-value {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .feature-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .feature-tag {
+            padding: 0.4rem 0.75rem;
+            background: var(--bg);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .modal-origin {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .modal-origin-flag {
+            font-size: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-inner { flex-wrap: wrap; }
+            .search-box { max-width: 100%; order: 3; width: 100%; }
+            .modal-content { grid-template-columns: 1fr; }
+            .modal-image { min-height: 250px; }
+            .grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+            .card-body { padding: 1rem; }
+            main { padding: 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="index.html" class="logo">Çantaloji <span>/ Veritabanı</span></a>
+        <div class="search-box">
+            <input type="text" id="search" placeholder="Marka, model veya özellik ara...">
+        </div>
+        <nav style="display:flex;gap:1.5rem;align-items:center;">
+            <a href="blog.html" style="color:var(--text-secondary);text-decoration:none;font-size:0.9rem;font-weight:500;">Blog</a>
+            <div class="header-stats">
+                <strong id="count">0</strong> çanta
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div class="filters">
+    <div class="filters-inner">
+        <button class="filter-btn active" data-type="all">Tümü</button>
+        <button class="filter-btn" data-type="backpack">Sırt Çantası</button>
+        <button class="filter-btn" data-type="sling">Sling</button>
+        <button class="filter-btn" data-type="turkish">Türk Markaları</button>
+
+        <div class="filter-divider"></div>
+
+        <select class="filter-select" id="brandFilter">
+            <option value="">Marka</option>
+        </select>
+        <select class="filter-select" id="volumeFilter">
+            <option value="">Hacim</option>
+            <option value="0-15">0-15L</option>
+            <option value="15-25">15-25L</option>
+            <option value="25-35">25-35L</option>
+            <option value="35+">35L+</option>
+        </select>
+        <select class="filter-select" id="priceFilter">
+            <option value="">Fiyat</option>
+            <option value="0-100">$0-100</option>
+            <option value="100-200">$100-200</option>
+            <option value="200-300">$200-300</option>
+            <option value="300+">$300+</option>
+        </select>
+        <select class="filter-select" id="countryFilter">
+            <option value="">Ülke</option>
+        </select>
+    </div>
+</div>
+
+<main>
+    <div class="grid" id="grid"></div>
+    <div class="load-more-container">
+        <button class="load-more" id="loadMore">Daha Fazla Göster</button>
+    </div>
+    <div class="no-results" id="noResults" style="display:none;">
+        <p>Sonuç bulunamadı. Filtreleri değiştirmeyi deneyin.</p>
+    </div>
+</main>
+
+<footer>
+    <p>Veriler <a href="https://bagdb.notion.site" target="_blank">Bag Database</a>'den alınmıştır.</p>
+    <p style="margin-top:0.5rem;"><a href="https://kraftcover.shop" target="_blank">Kraftcover</a> tarafından desteklenmektedir.</p>
+</footer>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay"></div>
+<div class="modal" id="modal">
+    <button class="modal-close" id="modalClose">×</button>
+    <div class="modal-content">
+        <div class="modal-image" id="modalImage"></div>
+        <div class="modal-details" id="modalDetails"></div>
+    </div>
+</div>
+
+<script>
+const bags = [
+// Kraftcover - Turkish Brand
+{id:1,name:"All City BackPack",brand:"Kraftcover",volume:20,price:100,type:"backpack",origin:"Türkiye",flag:"🇹🇷",laptop:16,material:"100% Ripstop Naylon",opening:"Clamshell",weight:"1.2 kg",dimensions:"45×30×15 cm",features:["4 Bölme","Su Geçirmez","YKK Fermuar","16\" Laptop"],warranty:"Ömür Boyu",turkish:true,image:"https://kraftcover.shop/cdn/shop/files/DSC07638-min.jpg?v=1699888888&width=800"},
+{id:2,name:"Rove Sling",brand:"Kraftcover",volume:4,price:58,type:"sling",origin:"Türkiye",flag:"🇹🇷",laptop:0,material:"Su Geçirmez Naylon",opening:"Zip",weight:"0.35 kg",dimensions:"28×18×8 cm",features:["Kompakt","Günlük Kullanım","Ayarlanabilir Kayış"],warranty:"Ömür Boyu",turkish:true,image:"https://kraftcover.shop/cdn/shop/files/DSC08009_copy-min.jpg?v=1699888888&width=800"},
+{id:3,name:"Rove Sling Mini",brand:"Kraftcover",volume:2,price:43,type:"sling",origin:"Türkiye",flag:"🇹🇷",laptop:0,material:"Su Geçirmez Naylon",opening:"Zip",weight:"0.25 kg",dimensions:"22×14×6 cm",features:["Ultra Kompakt","Minimalist"],warranty:"Ömür Boyu",turkish:true,image:"https://kraftcover.shop/cdn/shop/files/DSC08009_copy-min.jpg?v=1699888888&width=800"},
+
+// Aer
+{id:4,name:"City Pack 2",brand:"Aer",volume:16,price:149,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:16,material:"1680D Cordura Ballistic",opening:"Clamshell",weight:"1.1 kg",dimensions:"46×30×14 cm",features:["Tech Org","Bagaj Geçişi","YKK AquaGuard"],warranty:"Ömür Boyu",image:"https://cdn.shopify.com/s/files/1/0abortedte/aer-city-pack-2.jpg"},
+{id:5,name:"City Pack Pro 2",brand:"Aer",volume:24,price:209,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:16,material:"1680D Cordura / X-Pac",opening:"Clamshell",weight:"1.3 kg",dimensions:"46×32×18 cm",features:["Harici Laptop","Tech Org","Su Geçirmez Fermuarlar"],warranty:"Ömür Boyu",image:"https://aersf.com/cdn/shop/files/AER-31011_City_Pack_Pro_2_Black_hero.jpg?v=1699401584&width=800"},
+{id:6,name:"Travel Pack 3",brand:"Aer",volume:35,price:250,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:16,material:"VX-42 X-Pac",opening:"Clamshell",weight:"1.8 kg",dimensions:"55×33×22 cm",features:["Kilitli Fermuarlar","Sıkıştırma Kayışları","Ayakkabı Bölmesi"],warranty:"Ömür Boyu",image:"https://aersf.com/cdn/shop/files/AER-21027_Travel_Pack_3_Xpac_Black_hero.jpg?v=1699401584&width=800"},
+{id:7,name:"Day Sling 3",brand:"Aer",volume:3,price:79,type:"sling",origin:"ABD",flag:"🇺🇸",laptop:0,material:"1680D Cordura Ballistic",opening:"Zip",weight:"0.36 kg",dimensions:"29×15×8 cm",features:["Tech Org","Kompakt","YKK Fermuarlar"],warranty:"Ömür Boyu",image:"https://aersf.com/cdn/shop/files/AER-11012_Day_Sling_3_Black_hero.jpg?v=1699401584&width=800"},
+{id:8,name:"Tech Sling 3",brand:"Aer",volume:9,price:119,type:"sling",origin:"ABD",flag:"🇺🇸",laptop:14,material:"1680D Cordura Ballistic",opening:"Zip",weight:"0.59 kg",dimensions:"38×26×10 cm",features:["14\" Laptop","Tech Org","Tablet Bölmesi"],warranty:"Ömür Boyu",image:"https://aersf.com/cdn/shop/files/AER-11008_Tech_Sling_3_Black_hero.jpg?v=1699401584&width=800"},
+{id:9,name:"Flight Pack 3",brand:"Aer",volume:20,price:180,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:16,material:"1680D Cordura Ballistic",opening:"180° Half Zip",weight:"1.5 kg",dimensions:"46×30×14 cm",features:["Omuz Taşıma","Kilitli","Gizlenebilir Kayışlar"],warranty:"Ömür Boyu",image:"https://aersf.com/cdn/shop/files/AER-21010_Flight_Pack_3_Black_hero.jpg?v=1699401584&width=800"},
+{id:10,name:"Pro Pack 24L",brand:"Aer",volume:24,price:200,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:16,material:"840D Cordura Recycled",opening:"Clamshell",weight:"1.3 kg",dimensions:"47×32×19 cm",features:["4 Tutamaç","Harici Laptop","Recycled Malzeme"],warranty:"Ömür Boyu",image:"https://aersf.com/cdn/shop/files/AER_PP24_Black_hero.jpg?v=1699401584&width=800"},
+
+// Peak Design
+{id:11,name:"Everyday Backpack 20L",brand:"Peak Design",volume:20,price:260,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:16,material:"400D Nylon Canvas",opening:"Side Access",weight:"1.4 kg",dimensions:"46×28×17 cm",features:["MagLatch","FlexFold Bölücüler","Yan Erişim","Tripod Taşıma"],warranty:"Ömür Boyu",image:"https://cdn.shopify.com/s/files/1/0086/8155/products/BEDB-20-BK-2_1800x1800.jpg?v=1663788888"},
+{id:12,name:"Everyday Backpack 30L",brand:"Peak Design",volume:30,price:290,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:16,material:"400D Nylon Canvas",opening:"Side Access",weight:"1.6 kg",dimensions:"51×30×20 cm",features:["MagLatch","FlexFold Bölücüler","Yan Erişim"],warranty:"Ömür Boyu",image:"https://cdn.shopify.com/s/files/1/0086/8155/products/BEDB-30-BK-2_1800x1800.jpg?v=1663788888"},
+{id:13,name:"Travel Backpack 45L",brand:"Peak Design",volume:45,price:300,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:16,material:"400D Nylon Canvas",opening:"Clamshell",weight:"2.1 kg",dimensions:"56×35×25 cm",features:["Kabin Boyutu","Genişleyebilir","Kilitli Fermuarlar"],warranty:"Ömür Boyu",image:"https://cdn.shopify.com/s/files/1/0086/8155/products/BTR-45-BK-1_1800x1800.jpg?v=1663788888"},
+{id:14,name:"Everyday Sling 6L",brand:"Peak Design",volume:6,price:100,type:"sling",origin:"ABD",flag:"🇺🇸",laptop:0,material:"400D Nylon Canvas",opening:"Zip",weight:"0.45 kg",dimensions:"33×19×11 cm",features:["FlexFold Bölücü","Hızlı Erişim","Kamera için İdeal"],warranty:"Ömür Boyu",image:"https://cdn.shopify.com/s/files/1/0086/8155/products/BSL-6-BK-1_1800x1800.jpg?v=1663788888"},
+{id:15,name:"Everyday Sling 10L",brand:"Peak Design",volume:10,price:130,type:"sling",origin:"ABD",flag:"🇺🇸",laptop:13,material:"400D Nylon Canvas",opening:"Zip",weight:"0.55 kg",dimensions:"42×24×14 cm",features:["13\" Tablet","FlexFold","Kamera Uyumlu"],warranty:"Ömür Boyu",image:"https://cdn.shopify.com/s/files/1/0086/8155/products/BSL-10-BK-1_1800x1800.jpg?v=1663788888"},
+
+// Bellroy
+{id:16,name:"Classic Backpack",brand:"Bellroy",volume:20,price:149,type:"backpack",origin:"Avustralya",flag:"🇦🇺",laptop:16,material:"Ribba Weave",opening:"Toploader",weight:"0.68 kg",dimensions:"48×32×18 cm",features:["Tech Org","Premium Deri Detaylar","Hafif"],warranty:"6 Yıl",image:"https://bellroy.imgix.net/product/classic-backpack/black/gallery_1.jpg?w=800"},
+{id:17,name:"Transit Workpack",brand:"Bellroy",volume:20,price:179,type:"backpack",origin:"Avustralya",flag:"🇦🇺",laptop:16,material:"Baida Nylon",opening:"Clamshell",weight:"0.95 kg",dimensions:"51×38×17 cm",features:["Harici Laptop","Bagaj Geçişi","İş için İdeal"],warranty:"6 Yıl",image:"https://bellroy.imgix.net/product/transit-workpack/black/gallery_1.jpg?w=800"},
+{id:18,name:"Venture Ready Pack 26L",brand:"Bellroy",volume:26,price:259,type:"backpack",origin:"Avustralya",flag:"🇦🇺",laptop:16,material:"Baida Nylon",opening:"Clamshell",weight:"0.95 kg",dimensions:"50×33×19 cm",features:["Sıkıştırma Kayışları","Outdoor Uyumlu"],warranty:"6 Yıl",image:"https://bellroy.imgix.net/product/venture-ready-pack/black/gallery_1.jpg?w=800"},
+{id:19,name:"Sling Mini",brand:"Bellroy",volume:4,price:75,type:"sling",origin:"Avustralya",flag:"🇦🇺",laptop:0,material:"Ribba Weave",opening:"Zip",weight:"0.26 kg",dimensions:"32×13×11 cm",features:["Kompakt","Premium Malzeme","Günlük Kullanım"],warranty:"6 Yıl",image:"https://bellroy.imgix.net/product/sling-mini/black/gallery_1.jpg?w=800"},
+{id:20,name:"Venture Sling 9L",brand:"Bellroy",volume:9,price:139,type:"sling",origin:"Avustralya",flag:"🇦🇺",laptop:11,material:"Baida Nylon",opening:"Zip",weight:"0.42 kg",dimensions:"42×22×10 cm",features:["11\" Tablet","Outdoor Uyumlu","Su Şişesi Cebi"],warranty:"6 Yıl",image:"https://bellroy.imgix.net/product/venture-sling/black/gallery_1.jpg?w=800"},
+
+// Able Carry
+{id:21,name:"Daily Backpack",brand:"Able Carry",volume:20,price:160,type:"backpack",origin:"Hong Kong",flag:"🇭🇰",laptop:16,material:"Nylon 1000D / X-Pac",opening:"180° Half Zip",weight:"0.9 kg",dimensions:"48×28×19 cm",features:["Tech Org","Gizli Cep","Premium Yapı"],warranty:"Ömür Boyu",image:"https://ablecarry.com/cdn/shop/files/DailyBackpack_Black_1.jpg?v=1699888888&width=800"},
+{id:22,name:"Max EDC",brand:"Able Carry",volume:26,price:280,type:"backpack",origin:"Hong Kong",flag:"🇭🇰",laptop:17,material:"Ripstop / X-PAC",opening:"Clamshell",weight:"1.5 kg",dimensions:"50×30×19 cm",features:["Çıkarılabilir Framesheet","Kart Slotu","17\" Laptop"],warranty:"Ömür Boyu",image:"https://ablecarry.com/cdn/shop/files/MaxEDC_Black_1.jpg?v=1699888888&width=800"},
+{id:23,name:"Thirteen Daybag",brand:"Able Carry",volume:13,price:178,type:"backpack",origin:"Hong Kong",flag:"🇭🇰",laptop:14,material:"X-Pac",opening:"180° Half Zip",weight:"0.63 kg",dimensions:"44×27×17 cm",features:["Kompakt","Gizli Cep","Hafif"],warranty:"Ömür Boyu",image:"https://ablecarry.com/cdn/shop/files/ThirteenDaybag_Black_1.jpg?v=1699888888&width=800"},
+
+// GORUCK
+{id:24,name:"GR1 21L",brand:"GORUCK",volume:21,price:335,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:15,material:"1000D Cordura",opening:"Clamshell",weight:"1.3 kg",dimensions:"46×29×14 cm",features:["Askeri Standart","Bombproof Yapı","MOLLE"],warranty:"Ömür Boyu",image:"https://www.goruck.com/cdn/shop/files/GR1-21L-Black-1.jpg?v=1699888888&width=800"},
+{id:25,name:"GR1 26L",brand:"GORUCK",volume:26,price:345,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:16,material:"1000D Cordura",opening:"Clamshell",weight:"1.5 kg",dimensions:"51×30×17 cm",features:["Askeri Standart","SCARS Garantisi","MOLLE"],warranty:"Ömür Boyu",image:"https://www.goruck.com/cdn/shop/files/GR1-26L-Black-1.jpg?v=1699888888&width=800"},
+{id:26,name:"GR2 34L",brand:"GORUCK",volume:34,price:415,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:17,material:"1000D Cordura",opening:"Clamshell",weight:"1.8 kg",dimensions:"52×32×23 cm",features:["Seyahat Odaklı","İç MOLLE","Çift Bölme"],warranty:"Ömür Boyu",image:"https://www.goruck.com/cdn/shop/files/GR2-34L-Black-1.jpg?v=1699888888&width=800"},
+
+// Evergoods
+{id:27,name:"Civic Half Zip 22L",brand:"Evergoods",volume:22,price:200,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:16,material:"500D HT Nylon 6,6",opening:"180° Half Zip",weight:"1.04 kg",dimensions:"46×28×20 cm",features:["Premium Yapı","Custom Kumaş","Minimalist"],warranty:"Ömür Boyu",image:"https://evergoods.us/cdn/shop/files/CHZ22-Black-1.jpg?v=1699888888&width=800"},
+{id:28,name:"Civic Panel Loader 24L",brand:"Evergoods",volume:24,price:280,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:15,material:"840D Ballistic",opening:"Clamshell",weight:"1.4 kg",dimensions:"46×29×18 cm",features:["Lash-point Tutamaklar","Premium Yapı"],warranty:"Ömür Boyu",image:"https://evergoods.us/cdn/shop/files/CPL24-Black-1.jpg?v=1699888888&width=800"},
+{id:29,name:"Civic Access Sling 2L",brand:"Evergoods",volume:2,price:99,type:"sling",origin:"ABD",flag:"🇺🇸",laptop:0,material:"840D Ballistic",opening:"Zip",weight:"0.36 kg",dimensions:"28×14×8 cm",features:["Custom Kumaş","Kompakt","EDC"],warranty:"Ömür Boyu",image:"https://evergoods.us/cdn/shop/files/CAS2L-Black-1.jpg?v=1699888888&width=800"},
+
+// Chrome Industries
+{id:30,name:"Kadet",brand:"Chrome Industries",volume:9,price:100,type:"sling",origin:"ABD",flag:"🇺🇸",laptop:11,material:"1050D Nylon",opening:"Zip",weight:"0.64 kg",dimensions:"42×20×9 cm",features:["Klasik Messenger","Seat Belt Toka","Su Geçirmez Astar"],warranty:"Ömür Boyu",image:"https://chromeindustries.com/cdn/shop/files/Kadet-Black-1.jpg?v=1699888888&width=800"},
+{id:31,name:"Kadet Max",brand:"Chrome Industries",volume:15,price:155,type:"sling",origin:"ABD",flag:"🇺🇸",laptop:15,material:"1680D Ballistic",opening:"Zip",weight:"0.72 kg",dimensions:"42×29×14 cm",features:["15\" Laptop","Büyük Kapasite","Seat Belt Toka"],warranty:"Ömür Boyu",image:"https://chromeindustries.com/cdn/shop/files/KadetMax-Black-1.jpg?v=1699888888&width=800"},
+
+// Cotopaxi
+{id:32,name:"Allpa 28L",brand:"Cotopaxi",volume:28,price:170,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:15,material:"Recycled 840D Nylon",opening:"Clamshell",weight:"1.0 kg",dimensions:"48×30×23 cm",features:["Kilitli","Yan Erişim","Sürdürülebilir"],warranty:"Ömür Boyu",image:"https://cdn.shopify.com/s/files/1/0281/3581/products/ALLPA-28L-BLK-1.jpg?v=1699888888&width=800"},
+{id:33,name:"Allpa 35L",brand:"Cotopaxi",volume:35,price:225,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:15,material:"Recycled 840D Nylon",opening:"Clamshell",weight:"1.3 kg",dimensions:"56×33×25 cm",features:["Seyahat Boyutu","Renkli Tasarımlar","Sürdürülebilir"],warranty:"Ömür Boyu",image:"https://cdn.shopify.com/s/files/1/0281/3581/products/ALLPA-35L-BLK-1.jpg?v=1699888888&width=800"},
+
+// Arc'teryx
+{id:34,name:"Mantis 26",brand:"Arc'teryx",volume:26,price:160,type:"backpack",origin:"Kanada",flag:"🇨🇦",laptop:17,material:"420D HD Nylon",opening:"180° Half Zip",weight:"0.86 kg",dimensions:"47×28×25 cm",features:["Alüminyum Destek","Outdoor Kalitesi","Hafif"],warranty:"5 Yıl",image:"https://arcteryx.com/cdn/shop/files/Mantis-26-Black-1.jpg?v=1699888888&width=800"},
+{id:35,name:"Granville 16",brand:"Arc'teryx",volume:16,price:200,type:"backpack",origin:"Kanada",flag:"🇨🇦",laptop:15,material:"400D Ripstop Recycled",opening:"Clamshell",weight:"0.77 kg",dimensions:"47×23×13 cm",features:["Su İtici DWR","Şehir Kullanımı","Minimalist"],warranty:"5 Yıl",image:"https://arcteryx.com/cdn/shop/files/Granville-16-Black-1.jpg?v=1699888888&width=800"},
+
+// Fjallraven
+{id:36,name:"Raven 28",brand:"Fjallraven",volume:28,price:150,type:"backpack",origin:"İsveç",flag:"🇸🇪",laptop:15,material:"G-1000 HeavyDuty",opening:"180° Half Zip",weight:"1.0 kg",dimensions:"47×31×21 cm",features:["G-1000 Kumaş","Klasik Tasarım","Dayanıklı"],warranty:"Ömür Boyu",image:"https://cdn.shopify.com/s/files/1/0230/8457/products/Raven-28-Black-1.jpg?v=1699888888&width=800"},
+{id:37,name:"Ulvö 23",brand:"Fjallraven",volume:23,price:125,type:"backpack",origin:"İsveç",flag:"🇸🇪",laptop:15,material:"Bergshell 400D",opening:"180° Half Zip",weight:"0.64 kg",dimensions:"45×28×13 cm",features:["Su Geçirmez","Rolltop Seçeneği","İskandinav Tasarım"],warranty:"Ömür Boyu",image:"https://cdn.shopify.com/s/files/1/0230/8457/products/Ulvo-23-Black-1.jpg?v=1699888888&width=800"},
+
+// Alpaka
+{id:38,name:"Elements Backpack Pro",brand:"Alpaka",volume:26,price:170,type:"backpack",origin:"Avustralya",flag:"🇦🇺",laptop:16,material:"X-Pac VX42",opening:"180° Half Zip",weight:"1.3 kg",dimensions:"48×30×18 cm",features:["Kilitli Fermuarlar","Tech Org","Su Geçirmez"],warranty:"Ömür Boyu",image:"https://alpakagear.com/cdn/shop/files/ElementsPro-Black-1.jpg?v=1699888888&width=800"},
+{id:39,name:"Bravo Backpack",brand:"Alpaka",volume:23,price:159,type:"backpack",origin:"Avustralya",flag:"🇦🇺",laptop:16,material:"X-Pac / Axoflux",opening:"180° Half Zip",weight:"1.2 kg",dimensions:"47×30×18 cm",features:["Tech Org","Modüler Sistem"],warranty:"Ömür Boyu",image:"https://alpakagear.com/cdn/shop/files/Bravo-Black-1.jpg?v=1699888888&width=800"},
+
+// Cabin Zero
+{id:40,name:"Classic 28L",brand:"Cabin Zero",volume:28,price:69,type:"backpack",origin:"İngiltere",flag:"🇬🇧",laptop:15,material:"600D Polyester",opening:"180° Half Zip",weight:"0.6 kg",dimensions:"39×29×20 cm",features:["Kabin Boyutu","Hafif","Uygun Fiyat"],warranty:"Ömür Boyu",image:"https://www.cabinzero.com/cdn/shop/files/Classic-28L-Black-1.jpg?v=1699888888&width=800"},
+{id:41,name:"ADV Pro 32L",brand:"Cabin Zero",volume:32,price:144,type:"backpack",origin:"İngiltere",flag:"🇬🇧",laptop:15,material:"500D Rip-Stop",opening:"Clamshell",weight:"0.9 kg",dimensions:"46×30×20 cm",features:["Pro Tech Org","GPS Tracker","HDPE Frame"],warranty:"Ömür Boyu",image:"https://www.cabinzero.com/cdn/shop/files/ADVPro-32L-Black-1.jpg?v=1699888888&width=800"},
+
+// Boundary Supply
+{id:42,name:"Errant Pack",brand:"Boundary Supply",volume:22,price:269,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:15,material:"500D Duramax Kodra",opening:"Clamshell",weight:"1.4 kg",dimensions:"48×25×14 cm",features:["Modüler Sistem","Magnetic Buckles","Kamera Uyumlu"],warranty:"3 Yıl",image:"https://boundarysupply.com/cdn/shop/files/Errant-Black-1.jpg?v=1699888888&width=800"},
+
+// Black Ember
+{id:43,name:"Citadel R3",brand:"Black Ember",volume:25,price:280,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:14,material:"Velocity Cordura",opening:"Clamshell",weight:"1.6 kg",dimensions:"50×30×18 cm",features:["Lashpoint Tutamaklar","Modüler","Premium Yapı"],warranty:"Ömür Boyu",image:"https://blackember.com/cdn/shop/files/CitadelR3-Black-1.jpg?v=1699888888&width=800"},
+{id:44,name:"Forge Max",brand:"Black Ember",volume:20,price:343,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:15,material:"500D Cordura / Hypalon",opening:"Clamshell",weight:"1.6 kg",dimensions:"46×30×15 cm",features:["30L'e Genişler","Maglock","Briefcase Taşıma"],warranty:"Ömür Boyu",image:"https://blackember.com/cdn/shop/files/ForgeMax-Black-1.jpg?v=1699888888&width=800"},
+
+// Deuter
+{id:45,name:"Giga",brand:"Deuter",volume:28,price:135,type:"backpack",origin:"Almanya",flag:"🇩🇪",laptop:15,material:"300D/600D PES",opening:"180° Half Zip",weight:"1.0 kg",dimensions:"48×33×18 cm",features:["Harici Laptop","Airstripes Sırt","Alman Mühendisliği"],warranty:"2 Yıl",image:"https://www.deuter.com/cdn/shop/files/Giga-Black-1.jpg?v=1699888888&width=800"},
+{id:46,name:"Utilion 30",brand:"Deuter",volume:30,price:155,type:"backpack",origin:"Almanya",flag:"🇩🇪",laptop:16,material:"Su Geçirmez",opening:"Rolltop & Clamshell",weight:"1.1 kg",dimensions:"51×30×18 cm",features:["34L'e Genişler","Çift Açılış","Bisiklet Uyumlu"],warranty:"2 Yıl",image:"https://www.deuter.com/cdn/shop/files/Utilion-30-Black-1.jpg?v=1699888888&width=800"},
+
+// Gregory
+{id:47,name:"Rhune 22",brand:"Gregory",volume:22,price:130,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:15,material:"Recycled 300D Polyester",opening:"180° Half Zip",weight:"0.95 kg",dimensions:"48×33×19 cm",features:["Tablet Bölmesi","Kayış Cepleri","Sürdürülebilir"],warranty:"Ömür Boyu",image:"https://www.gregorypacks.com/cdn/shop/files/Rhune-22-Black-1.jpg?v=1699888888&width=800"},
+
+// Topo Designs
+{id:48,name:"Rover Pack Classic",brand:"Topo Designs",volume:20,price:109,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:15,material:"1000D Cordura",opening:"Toploader",weight:"0.8 kg",dimensions:"43×28×14 cm",features:["Klasik Tasarım","Colorado'da Tasarlandı","Renkli Seçenekler"],warranty:"Ömür Boyu",image:"https://topodesigns.com/cdn/shop/files/RoverPack-Black-1.jpg?v=1699888888&width=800"},
+{id:49,name:"Global Travel Bag 30L",brand:"Topo Designs",volume:30,price:229,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:15,material:"1000D Cordura",opening:"Clamshell",weight:"1.4 kg",dimensions:"48×30×20 cm",features:["Seyahat Odaklı","Kabin Boyutu","Renkli Tasarımlar"],warranty:"Ömür Boyu",image:"https://topodesigns.com/cdn/shop/files/GTB-30L-Black-1.jpg?v=1699888888&width=800"},
+
+// Matador
+{id:50,name:"SEG28",brand:"Matador",volume:28,price:200,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:16,material:"Robic Nylon",opening:"Clamshell",weight:"0.9 kg",dimensions:"50×30×18 cm",features:["Segment Sistemi","Ultra Hafif","Seyahat için İdeal"],warranty:"Ömür Boyu",image:"https://matadorup.com/cdn/shop/files/SEG28-Black-1.jpg?v=1699888888&width=800"},
+{id:51,name:"On-Grid Packable",brand:"Matador",volume:16,price:49,type:"backpack",origin:"ABD",flag:"🇺🇸",laptop:0,material:"30D Ripstop",opening:"Toploader",weight:"0.12 kg",dimensions:"43×25×15 cm",features:["Ultra Kompakt","Katlanır","Acil Durum için"],warranty:"Ömür Boyu",image:"https://matadorup.com/cdn/shop/files/OnGrid-Black-1.jpg?v=1699888888&width=800"}
+];
+
+// State
+let filtered = [...bags];
+let displayCount = 20;
+let currentType = 'all';
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+    initFilters();
+    render();
+    bindEvents();
+});
+
+function initFilters() {
+    const brands = [...new Set(bags.map(b => b.brand))].sort();
+    const countries = [...new Set(bags.map(b => b.origin))].sort();
+
+    const brandSel = document.getElementById('brandFilter');
+    brands.forEach(b => brandSel.innerHTML += `<option value="${b}">${b}</option>`);
+
+    const countrySel = document.getElementById('countryFilter');
+    countries.forEach(c => countrySel.innerHTML += `<option value="${c}">${c}</option>`);
+}
+
+function render() {
+    const grid = document.getElementById('grid');
+    const noRes = document.getElementById('noResults');
+    const loadBtn = document.getElementById('loadMore');
+
+    document.getElementById('count').textContent = filtered.length;
+
+    const toShow = filtered.slice(0, displayCount);
+
+    if (toShow.length === 0) {
+        grid.innerHTML = '';
+        noRes.style.display = 'block';
+        loadBtn.style.display = 'none';
+        return;
+    }
+
+    noRes.style.display = 'none';
+    loadBtn.style.display = displayCount < filtered.length ? 'block' : 'none';
+
+    grid.innerHTML = toShow.map(bag => `
+        <div class="card ${bag.turkish ? 'turkish' : ''}" data-id="${bag.id}">
+            <div class="card-image">
+                ${bag.image ? `<img src="${bag.image}" alt="${bag.name}" loading="lazy" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=placeholder>🎒</div>'">` : '<div class="placeholder">🎒</div>'}
+            </div>
+            <div class="card-body">
+                <div class="card-brand">${bag.brand}</div>
+                <h3 class="card-title">${bag.name}</h3>
+                <div class="card-specs">
+                    <span>${bag.volume}L</span>
+                    ${bag.laptop ? `<span>💻 ${bag.laptop}"</span>` : ''}
+                    <span>${bag.weight}</span>
+                </div>
+                <div class="card-footer">
+                    <span class="card-price">$${bag.price}</span>
+                    <span class="card-origin">${bag.flag} ${bag.origin}</span>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    // Bind card clicks
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', () => openModal(parseInt(card.dataset.id)));
+    });
+}
+
+function bindEvents() {
+    // Search
+    document.getElementById('search').addEventListener('input', applyFilters);
+
+    // Type buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentType = btn.dataset.type;
+            applyFilters();
+        });
+    });
+
+    // Selects
+    ['brandFilter', 'volumeFilter', 'priceFilter', 'countryFilter'].forEach(id => {
+        document.getElementById(id).addEventListener('change', applyFilters);
+    });
+
+    // Load more
+    document.getElementById('loadMore').addEventListener('click', () => {
+        displayCount += 20;
+        render();
+    });
+
+    // Modal close
+    document.getElementById('modalOverlay').addEventListener('click', closeModal);
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+}
+
+function applyFilters() {
+    const search = document.getElementById('search').value.toLowerCase();
+    const brand = document.getElementById('brandFilter').value;
+    const volume = document.getElementById('volumeFilter').value;
+    const price = document.getElementById('priceFilter').value;
+    const country = document.getElementById('countryFilter').value;
+
+    filtered = bags.filter(bag => {
+        if (currentType === 'backpack' && bag.type !== 'backpack') return false;
+        if (currentType === 'sling' && bag.type !== 'sling') return false;
+        if (currentType === 'turkish' && !bag.turkish) return false;
+
+        if (search) {
+            const str = `${bag.name} ${bag.brand} ${bag.material} ${bag.features?.join(' ')} ${bag.origin}`.toLowerCase();
+            if (!str.includes(search)) return false;
+        }
+
+        if (brand && bag.brand !== brand) return false;
+        if (country && bag.origin !== country) return false;
+
+        if (volume) {
+            const [min, max] = volume.includes('+') ? [parseInt(volume), 999] : volume.split('-').map(Number);
+            if (bag.volume < min || bag.volume > max) return false;
+        }
+
+        if (price) {
+            const [min, max] = price.includes('+') ? [parseInt(price), 9999] : price.split('-').map(Number);
+            if (bag.price < min || bag.price > max) return false;
+        }
+
+        return true;
+    });
+
+    // Sort: Turkish first
+    filtered.sort((a, b) => (b.turkish ? 1 : 0) - (a.turkish ? 1 : 0));
+
+    displayCount = 20;
+    render();
+}
+
+function openModal(id) {
+    const bag = bags.find(b => b.id === id);
+    if (!bag) return;
+
+    document.getElementById('modalImage').innerHTML = bag.image
+        ? `<img src="${bag.image}" alt="${bag.name}">`
+        : '<div class="placeholder">🎒</div>';
+
+    document.getElementById('modalDetails').innerHTML = `
+        <div class="modal-brand">${bag.brand}</div>
+        <h2 class="modal-title">${bag.name}</h2>
+        <div class="modal-price">$${bag.price}</div>
+
+        <div class="modal-section">
+            <div class="modal-section-title">Teknik Özellikler</div>
+            <div class="spec-grid">
+                <div class="spec-item">
+                    <div class="spec-label">Hacim</div>
+                    <div class="spec-value">${bag.volume} Litre</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Ağırlık</div>
+                    <div class="spec-value">${bag.weight}</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Boyutlar</div>
+                    <div class="spec-value">${bag.dimensions}</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Açılış</div>
+                    <div class="spec-value">${bag.opening}</div>
+                </div>
+                ${bag.laptop ? `
+                <div class="spec-item">
+                    <div class="spec-label">Laptop</div>
+                    <div class="spec-value">${bag.laptop}" max</div>
+                </div>
+                ` : ''}
+                <div class="spec-item">
+                    <div class="spec-label">Garanti</div>
+                    <div class="spec-value">${bag.warranty}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-section">
+            <div class="modal-section-title">Malzeme</div>
+            <p style="font-size:0.9rem;color:var(--text-secondary)">${bag.material}</p>
+        </div>
+
+        ${bag.features ? `
+        <div class="modal-section">
+            <div class="modal-section-title">Özellikler</div>
+            <div class="feature-tags">
+                ${bag.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
+            </div>
+        </div>
+        ` : ''}
+
+        <div class="modal-section">
+            <div class="modal-origin">
+                <span class="modal-origin-flag">${bag.flag}</span>
+                <span>${bag.origin}'de Tasarlandı</span>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('modalOverlay').classList.add('active');
+    document.getElementById('modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('active');
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+</script>
+</body>
+</html>
