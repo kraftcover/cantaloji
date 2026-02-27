@@ -4,12 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KabinBagaj — Kabin Bagajı Uyumluluk Kontrolü</title>
-  <meta name="description" content="Bagajınızın 150+ havayoluyla uyumluluğunu anında kontrol edin.">
+  <meta name="description" content="Bagajınızın 115+ havayoluyla uyumluluğunu anında kontrol edin.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -49,8 +46,6 @@
     }
     ::selection { background: var(--accent); color: white; }
     input, select, button { font-family: inherit; }
-
-    /* === NOISE TEXTURE === */
     body::before {
       content: '';
       position: fixed;
@@ -60,563 +55,129 @@
       pointer-events: none;
       z-index: 9999;
     }
-
-    /* === GRID BG === */
     .grid-bg {
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      position: fixed; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
       background-size: 60px 60px;
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
-
-    /* === GLOW ORB === */
     .glow-orb {
-      position: fixed;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
+      position: fixed; width: 600px; height: 600px; border-radius: 50%;
       background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
-      top: -200px;
-      left: 50%;
-      transform: translateX(-50%);
-      pointer-events: none;
-      z-index: 0;
+      top: -200px; left: 50%; transform: translateX(-50%);
+      pointer-events: none; z-index: 0;
     }
-
     .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
-
-    /* === NAV === */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      position: sticky; top: 0; z-index: 100;
       backdrop-filter: blur(24px) saturate(180%);
       -webkit-backdrop-filter: blur(24px) saturate(180%);
       background: rgba(5,5,8,0.7);
       border-bottom: 1px solid var(--glass-border);
       padding: 0 24px;
     }
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-    }
-    .nav-logo {
-      font-weight: 800;
-      font-size: 20px;
-      letter-spacing: -0.5px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-logo { font-weight: 800; font-size: 20px; letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px; }
     .nav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; }
-    .nav-badge {
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 100px;
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    /* === HERO === */
-    .hero {
-      padding: 80px 0 40px;
-      text-align: center;
-    }
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--accent);
-      background: var(--accent-glow);
-      border: 1px solid rgba(99,102,241,0.2);
-      padding: 6px 14px;
-      border-radius: 100px;
-      margin-bottom: 24px;
-      letter-spacing: 0.3px;
-    }
-    .hero h1 {
-      font-size: clamp(36px, 6vw, 64px);
-      font-weight: 900;
-      letter-spacing: -2px;
-      line-height: 1.05;
-      margin-bottom: 16px;
-    }
-    .hero h1 .gradient {
-      background: linear-gradient(135deg, #818cf8, #6366f1, #4f46e5);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-sub {
-      font-size: 17px;
-      color: var(--text-secondary);
-      max-width: 460px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    /* === STEP TABS === */
-    .steps {
-      display: flex;
-      justify-content: center;
-      gap: 4px;
-      margin: 48px auto 32px;
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 14px;
-      padding: 4px;
-      max-width: 500px;
-    }
-    .step-btn {
-      flex: 1;
-      padding: 10px 16px;
-      border: none;
-      background: transparent;
-      color: var(--text-secondary);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      border-radius: var(--radius-sm);
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-    .step-btn.active {
-      background: var(--accent);
-      color: white;
-      box-shadow: 0 4px 20px rgba(99,102,241,0.3);
-    }
+    .nav-badge { font-family: var(--mono); font-size: 11px; padding: 4px 10px; border-radius: 100px; background: var(--glass); border: 1px solid var(--glass-border); color: var(--text-secondary); font-weight: 500; }
+    .hero { padding: 80px 0 40px; text-align: center; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--accent); background: var(--accent-glow); border: 1px solid rgba(99,102,241,0.2); padding: 6px 14px; border-radius: 100px; margin-bottom: 24px; letter-spacing: 0.3px; }
+    .hero h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 900; letter-spacing: -2px; line-height: 1.05; margin-bottom: 16px; }
+    .hero h1 .gradient { background: linear-gradient(135deg, #818cf8, #6366f1, #4f46e5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 17px; color: var(--text-secondary); max-width: 460px; margin: 0 auto; line-height: 1.6; }
+    .steps { display: flex; justify-content: center; gap: 4px; margin: 48px auto 32px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 14px; padding: 4px; max-width: 500px; }
+    .step-btn { flex: 1; padding: 10px 16px; border: none; background: transparent; color: var(--text-secondary); font-size: 13px; font-weight: 600; cursor: pointer; border-radius: var(--radius-sm); transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .step-btn.active { background: var(--accent); color: white; box-shadow: 0 4px 20px rgba(99,102,241,0.3); }
     .step-btn:not(.active):hover { background: rgba(255,255,255,0.05); color: var(--text); }
-    .step-num {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-      background: rgba(255,255,255,0.1);
-    }
+    .step-num { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; background: rgba(255,255,255,0.1); }
     .step-btn.active .step-num { background: rgba(255,255,255,0.25); }
     .step-btn.done .step-num { background: var(--green); color: white; }
-
-    /* === BENTO INPUT CARD === */
-    .bento-card {
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius);
-      padding: 32px;
-      backdrop-filter: blur(12px);
-      transition: border-color 0.3s;
-      max-width: 680px;
-      margin: 0 auto 24px;
-    }
+    .bento-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 32px; backdrop-filter: blur(12px); transition: border-color 0.3s; max-width: 680px; margin: 0 auto 24px; }
     .bento-card:hover { border-color: var(--glass-border-hover); }
-    .bento-card h3 {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .bento-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
     .bento-card .subtitle { font-size: 13px; color: var(--text-secondary); margin-bottom: 24px; }
-
-    .dim-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
+    .dim-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .dim-grid.four { grid-template-columns: repeat(4, 1fr); }
-    @media (max-width: 500px) {
-      .dim-grid { grid-template-columns: repeat(2, 1fr); }
-      .dim-grid.four { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    .dim-input {
-      position: relative;
-    }
-    .dim-input label {
-      display: block;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-bottom: 6px;
-    }
-    .dim-input input {
-      width: 100%;
-      padding: 14px 16px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-sm);
-      color: var(--text);
-      font-size: 18px;
-      font-family: var(--mono);
-      font-weight: 600;
-      transition: all 0.2s;
-      outline: none;
-    }
-    .dim-input input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-glow);
-      background: rgba(99,102,241,0.04);
-    }
+    @media (max-width: 500px) { .dim-grid, .dim-grid.four { grid-template-columns: repeat(2, 1fr); } }
+    .dim-input { position: relative; }
+    .dim-input label { display: block; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+    .dim-input input { width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); color: var(--text); font-size: 18px; font-family: var(--mono); font-weight: 600; transition: all 0.2s; outline: none; }
+    .dim-input input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); background: rgba(99,102,241,0.04); }
     .dim-input input::placeholder { color: var(--text-muted); font-weight: 400; }
-    .dim-input .unit {
-      position: absolute;
-      right: 12px;
-      bottom: 14px;
-      font-size: 12px;
-      color: var(--text-muted);
-      font-weight: 500;
-      pointer-events: none;
-    }
-
-    .soft-toggle {
-      margin-top: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      color: var(--text-secondary);
-      cursor: pointer;
-    }
-    .soft-toggle input[type="checkbox"] {
-      appearance: none;
-      width: 40px;
-      height: 22px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 11px;
-      position: relative;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .soft-toggle input[type="checkbox"]::after {
-      content: '';
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: white;
-      top: 3px;
-      left: 3px;
-      transition: transform 0.2s;
-    }
+    .dim-input .unit { position: absolute; right: 12px; bottom: 14px; font-size: 12px; color: var(--text-muted); font-weight: 500; pointer-events: none; }
+    .soft-toggle { margin-top: 16px; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary); cursor: pointer; }
+    .soft-toggle input[type="checkbox"] { appearance: none; width: 40px; height: 22px; background: rgba(255,255,255,0.08); border-radius: 11px; position: relative; cursor: pointer; transition: background 0.2s; }
+    .soft-toggle input[type="checkbox"]::after { content: ''; position: absolute; width: 16px; height: 16px; border-radius: 50%; background: white; top: 3px; left: 3px; transition: transform 0.2s; }
     .soft-toggle input[type="checkbox"]:checked { background: var(--accent); }
     .soft-toggle input[type="checkbox"]:checked::after { transform: translateX(18px); }
-
-    /* === AIRLINE SELECTOR === */
     .airline-selector { max-width: 680px; margin: 0 auto 24px; }
-
-    .mode-toggle {
-      display: flex;
-      gap: 4px;
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-sm);
-      padding: 3px;
-      margin-bottom: 16px;
-    }
-    .mode-btn {
-      flex: 1;
-      padding: 8px 12px;
-      border: none;
-      background: transparent;
-      color: var(--text-secondary);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      border-radius: 8px;
-      transition: all 0.2s;
-    }
+    .mode-toggle { display: flex; gap: 4px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); padding: 3px; margin-bottom: 16px; }
+    .mode-btn { flex: 1; padding: 8px 12px; border: none; background: transparent; color: var(--text-secondary); font-size: 13px; font-weight: 600; cursor: pointer; border-radius: 8px; transition: all 0.2s; }
     .mode-btn.active { background: rgba(255,255,255,0.08); color: var(--text); }
     .mode-btn:hover:not(.active) { color: var(--text); }
-
-    .search-box {
-      position: relative;
-      margin-bottom: 12px;
-    }
-    .search-box input {
-      width: 100%;
-      padding: 12px 16px 12px 40px;
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-sm);
-      color: var(--text);
-      font-size: 14px;
-      outline: none;
-      transition: all 0.2s;
-    }
-    .search-box input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-glow);
-    }
+    .search-box { position: relative; margin-bottom: 12px; }
+    .search-box input { width: 100%; padding: 12px 16px 12px 40px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); color: var(--text); font-size: 14px; outline: none; transition: all 0.2s; }
+    .search-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
     .search-box input::placeholder { color: var(--text-muted); }
-    .search-box .search-icon {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 14px;
-      opacity: 0.3;
-    }
-
-    .region-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-    .chip {
-      padding: 6px 14px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 600;
-      border: 1px solid var(--glass-border);
-      background: transparent;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
+    .search-box .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 14px; opacity: 0.3; }
+    .region-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .chip { padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 600; border: 1px solid var(--glass-border); background: transparent; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
     .chip:hover { border-color: var(--glass-border-hover); color: var(--text); }
     .chip.active { background: var(--accent); border-color: var(--accent); color: white; }
-
-    .airline-list {
-      max-height: 320px;
-      overflow-y: auto;
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-sm);
-      background: var(--glass);
-    }
+    .airline-list { max-height: 320px; overflow-y: auto; border: 1px solid var(--glass-border); border-radius: var(--radius-sm); background: var(--glass); }
     .airline-list::-webkit-scrollbar { width: 6px; }
     .airline-list::-webkit-scrollbar-track { background: transparent; }
     .airline-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
-
-    .airline-row {
-      display: flex;
-      align-items: center;
-      padding: 10px 16px;
-      cursor: pointer;
-      transition: background 0.15s;
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-      gap: 12px;
-    }
+    .airline-row { display: flex; align-items: center; padding: 10px 16px; cursor: pointer; transition: background 0.15s; border-bottom: 1px solid rgba(255,255,255,0.03); gap: 12px; }
     .airline-row:last-child { border-bottom: none; }
     .airline-row:hover { background: rgba(255,255,255,0.04); }
     .airline-row.selected { background: var(--accent-glow); }
-
-    .airline-check {
-      width: 18px;
-      height: 18px;
-      border-radius: 4px;
-      border: 2px solid rgba(255,255,255,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: all 0.2s;
-      font-size: 11px;
-    }
-    .airline-row.selected .airline-check {
-      background: var(--accent);
-      border-color: var(--accent);
-    }
+    .airline-check { width: 18px; height: 18px; border-radius: 4px; border: 2px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; font-size: 11px; }
+    .airline-row.selected .airline-check { background: var(--accent); border-color: var(--accent); }
     .airline-flag { font-size: 18px; flex-shrink: 0; }
     .airline-info { flex: 1; min-width: 0; }
     .airline-name-row { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .airline-meta { font-size: 11px; color: var(--text-muted); }
-    .airline-iata {
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 600;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: rgba(255,255,255,0.05);
-      color: var(--text-secondary);
-      flex-shrink: 0;
-    }
-    .select-all-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 0;
-      font-size: 12px;
-      color: var(--text-secondary);
-    }
-    .select-all-bar button {
-      background: none;
-      border: none;
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 12px;
-      cursor: pointer;
-    }
+    .airline-iata { font-family: var(--mono); font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.05); color: var(--text-secondary); flex-shrink: 0; }
+    .select-all-bar { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 12px; color: var(--text-secondary); }
+    .select-all-bar button { background: none; border: none; color: var(--accent); font-weight: 600; font-size: 12px; cursor: pointer; }
     .select-all-bar button:hover { text-decoration: underline; }
-
-    /* === CTA BUTTON === */
     .cta-wrap { max-width: 680px; margin: 0 auto 40px; }
-    .cta-btn {
-      width: 100%;
-      padding: 16px;
-      border: none;
-      border-radius: var(--radius-sm);
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.25s;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, #6366f1, #4f46e5);
-      color: white;
-      letter-spacing: 0.3px;
-    }
-    .cta-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 30px rgba(99,102,241,0.35);
-    }
+    .cta-btn { width: 100%; padding: 16px; border: none; border-radius: var(--radius-sm); font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.25s; position: relative; overflow: hidden; background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; letter-spacing: 0.3px; }
+    .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(99,102,241,0.35); }
     .cta-btn:active { transform: translateY(0); }
     .cta-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
-    .cta-btn .shine {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);
-      transform: translateX(-100%);
-      transition: transform 0.6s;
-    }
+    .cta-btn .shine { position: absolute; inset: 0; background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%); transform: translateX(-100%); transition: transform 0.6s; }
     .cta-btn:hover .shine { transform: translateX(100%); }
-
-    /* === RESULTS === */
     .results { padding-bottom: 80px; }
-
-    .results-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-    .results-title {
-      font-size: 28px;
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
-    .results-dims {
-      font-family: var(--mono);
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-top: 4px;
-    }
-
-    /* Stats bento */
-    .stats-bento {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 32px;
-    }
+    .results-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 32px; }
+    .results-title { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
+    .results-dims { font-family: var(--mono); font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+    .stats-bento { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 32px; }
     @media (max-width: 600px) { .stats-bento { grid-template-columns: repeat(2, 1fr); } }
-    .stat-card {
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius);
-      padding: 20px;
-      text-align: center;
-      transition: all 0.25s;
-    }
+    .stat-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 20px; text-align: center; transition: all 0.25s; }
     .stat-card:hover { border-color: var(--glass-border-hover); transform: translateY(-2px); }
-    .stat-card .stat-value {
-      font-family: var(--mono);
-      font-size: 32px;
-      font-weight: 800;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
+    .stat-card .stat-value { font-family: var(--mono); font-size: 32px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
     .stat-card .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; }
     .stat-card.green .stat-value { color: var(--green); }
     .stat-card.amber .stat-value { color: var(--amber); }
     .stat-card.red .stat-value { color: var(--red); }
-    .stat-card.total .stat-value { color: var(--text-secondary); }
-
-    /* Sort bar */
-    .sort-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+    .sort-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
     .sort-bar .left { font-size: 13px; color: var(--text-secondary); }
-    .sort-pills {
-      display: flex;
-      gap: 4px;
-    }
-    .sort-pill {
-      padding: 6px 14px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 600;
-      border: 1px solid var(--glass-border);
-      background: transparent;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all 0.15s;
-    }
+    .sort-pills { display: flex; gap: 4px; }
+    .sort-pill { padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 600; border: 1px solid var(--glass-border); background: transparent; color: var(--text-secondary); cursor: pointer; transition: all 0.15s; }
     .sort-pill.active { background: rgba(255,255,255,0.08); color: var(--text); border-color: var(--glass-border-hover); }
     .sort-pill:hover { border-color: var(--glass-border-hover); }
-
-    /* Result cards */
-    .result-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 12px;
-    }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
     @media (max-width: 700px) { .result-grid { grid-template-columns: 1fr; } }
-
-    .result-card {
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius);
-      padding: 20px;
-      transition: all 0.25s;
-      position: relative;
-      overflow: hidden;
-    }
-    .result-card::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      opacity: 0;
-      transition: opacity 0.25s;
-    }
+    .result-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 20px; transition: all 0.25s; position: relative; overflow: hidden; }
+    .result-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; opacity: 0; transition: opacity 0.25s; }
     .result-card:hover { border-color: var(--glass-border-hover); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
     .result-card:hover::after { opacity: 1; }
     .result-card.fit::after { background: var(--green); opacity: 1; }
     .result-card.tight::after { background: var(--amber); opacity: 1; }
     .result-card.nofit::after { background: var(--red); opacity: 1; }
     .result-card.personal::after { background: var(--blue); opacity: 1; }
-
     .rc-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
     .rc-airline { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
     .rc-flag { font-size: 22px; }
@@ -624,20 +185,11 @@
     .rc-meta-line { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
     .rc-iata { font-family: var(--mono); font-size: 11px; font-weight: 600; background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 3px; }
     .rc-country { font-size: 11px; color: var(--text-muted); }
-
-    .rc-badge {
-      padding: 4px 12px;
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 700;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
+    .rc-badge { padding: 4px 12px; border-radius: 100px; font-size: 11px; font-weight: 700; white-space: nowrap; flex-shrink: 0; }
     .rc-badge.fit { background: var(--green-glow); color: var(--green); }
     .rc-badge.tight { background: var(--amber-glow); color: var(--amber); }
     .rc-badge.nofit { background: var(--red-glow); color: var(--red); }
     .rc-badge.personal { background: rgba(59,130,246,0.12); color: var(--blue); }
-
     .rc-bars { margin-bottom: 12px; }
     .rc-bar { margin-bottom: 8px; }
     .rc-bar-header { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; }
@@ -647,122 +199,25 @@
     .rc-bar-val.amber { color: var(--amber); }
     .rc-bar-val.red { color: var(--red); }
     .rc-bar-val.blue { color: var(--blue); }
-    .rc-bar-track {
-      width: 100%;
-      height: 4px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 2px;
-      overflow: hidden;
-    }
+    .rc-bar-track { width: 100%; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
     .rc-bar-fill { height: 100%; border-radius: 2px; transition: width 0.6s cubic-bezier(0.16,1,0.3,1); }
     .rc-bar-fill.green { background: linear-gradient(90deg, #059669, #10b981); }
     .rc-bar-fill.amber { background: linear-gradient(90deg, #d97706, #f59e0b); }
     .rc-bar-fill.red { background: linear-gradient(90deg, #dc2626, #ef4444); }
     .rc-bar-fill.blue { background: linear-gradient(90deg, #2563eb, #3b82f6); }
-
-    .rc-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255,255,255,0.04);
-    }
-    .rc-dims {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text-muted);
-      display: flex;
-      gap: 10px;
-    }
+    .rc-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.04); }
+    .rc-dims { font-family: var(--mono); font-size: 11px; color: var(--text-muted); display: flex; gap: 10px; }
     .rc-note { font-size: 11px; color: var(--text-muted); text-align: right; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-    .rc-weight-warn {
-      margin-top: 8px;
-      padding: 6px 10px;
-      background: var(--amber-glow);
-      border-radius: var(--radius-xs);
-      font-size: 11px;
-      color: var(--amber);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--glass-border);
-      padding: 40px 0;
-      text-align: center;
-    }
+    .rc-weight-warn { margin-top: 8px; padding: 6px 10px; background: var(--amber-glow); border-radius: var(--radius-xs); font-size: 11px; color: var(--amber); display: flex; align-items: center; gap: 6px; }
+    footer { border-top: 1px solid var(--glass-border); padding: 40px 0; text-align: center; }
     footer p { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
     footer .disclaimer { max-width: 500px; margin: 0 auto 12px; line-height: 1.7; }
-
-    /* Empty state */
-    .empty { text-align: center; padding: 60px 20px; }
-    .empty-icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
-    .empty p { color: var(--text-muted); font-size: 14px; }
-
-    /* Animations */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
     .fade-up { animation: fadeUp 0.4s ease-out both; }
     .delay-1 { animation-delay: 0.05s; }
     .delay-2 { animation-delay: 0.1s; }
     .delay-3 { animation-delay: 0.15s; }
     .delay-4 { animation-delay: 0.2s; }
-
-    /* 3D bag illustration placeholder */
-    .bag-visual {
-      width: 120px;
-      height: 160px;
-      margin: 0 auto 20px;
-      position: relative;
-      perspective: 800px;
-    }
-    .bag-body {
-      width: 80px;
-      height: 110px;
-      background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(99,102,241,0.05));
-      border: 1px solid rgba(99,102,241,0.3);
-      border-radius: 8px 8px 4px 4px;
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%) rotateY(-8deg) rotateX(2deg);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
-    .bag-handle {
-      width: 30px;
-      height: 20px;
-      border: 2px solid rgba(99,102,241,0.3);
-      border-bottom: none;
-      border-radius: 6px 6px 0 0;
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .bag-wheel {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(99,102,241,0.3);
-      position: absolute;
-      bottom: 14px;
-    }
-    .bag-wheel.l { left: calc(50% - 24px); }
-    .bag-wheel.r { left: calc(50% + 16px); }
-    .bag-dim-label {
-      position: absolute;
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--accent);
-      font-weight: 600;
-    }
-    .bag-dim-h { right: 4px; top: 50%; transform: translateY(-50%); }
-    .bag-dim-w { bottom: 6px; left: 50%; transform: translateX(-50%); }
-
-    /* Responsive tweaks */
     @media (max-width: 600px) {
       .hero h1 { letter-spacing: -1px; }
       .bento-card { padding: 20px; }
@@ -776,498 +231,486 @@
   <div class="glow-orb"></div>
   <div id="root"></div>
 
-  <script type="text/babel">
-    const { useState, useMemo, useCallback } = React;
-
-    const airlines = [
-      {id:1,name:'Turkish Airlines',iata:'TK',country:'Türkiye',flag:'🇹🇷',region:'turkey',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Economy: 1 carry-on + 1 kişisel eşya'},
-      {id:2,name:'Pegasus Airlines',iata:'PC',country:'Türkiye',flag:'🇹🇷',region:'turkey',co:{h:55,w:40,d:20,kg:8},pi:{h:40,w:30,d:15},note:'Essentials: sadece kişisel eşya ücretsiz'},
-      {id:3,name:'SunExpress',iata:'XQ',country:'Türkiye',flag:'🇹🇷',region:'turkey',co:{h:55,w:40,d:20,kg:8},pi:{h:40,w:30,d:15},note:'Charter ve tarifeli uçuşlar'},
-      {id:4,name:'AnadoluJet',iata:'AJ',country:'Türkiye',flag:'🇹🇷',region:'turkey',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'THY iç hat markası'},
-      {id:5,name:'Corendon Airlines',iata:'XC',country:'Türkiye',flag:'🇹🇷',region:'turkey',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:30,d:15},note:'Turizm odaklı charter'},
-      {id:6,name:'Onur Air',iata:'8Q',country:'Türkiye',flag:'🇹🇷',region:'turkey',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'İç hat ve charter'},
-      {id:10,name:'American Airlines',iata:'AA',country:'ABD',flag:'🇺🇸',region:'northamerica',co:{h:56,w:36,d:23,kg:null},pi:{h:45,w:35,d:20},note:'Ağırlık sınırı yok'},
-      {id:11,name:'Delta Air Lines',iata:'DL',country:'ABD',flag:'🇺🇸',region:'northamerica',co:{h:56,w:36,d:23,kg:null},pi:{h:45,w:35,d:20},note:'Ağırlık sınırı yok'},
-      {id:12,name:'United Airlines',iata:'UA',country:'ABD',flag:'🇺🇸',region:'northamerica',co:{h:56,w:35,d:22,kg:null},pi:{h:43,w:25,d:22},note:'Ağırlık sınırı yok'},
-      {id:13,name:'Southwest Airlines',iata:'WN',country:'ABD',flag:'🇺🇸',region:'northamerica',co:{h:61,w:41,d:25,kg:null},pi:{h:46,w:34,d:22},note:'2 ücretsiz bagaj'},
-      {id:14,name:'JetBlue Airways',iata:'B6',country:'ABD',flag:'🇺🇸',region:'northamerica',co:{h:56,w:36,d:23,kg:null},pi:{h:43,w:33,d:20},note:'Ağırlık sınırı yok'},
-      {id:15,name:'Alaska Airlines',iata:'AS',country:'ABD',flag:'🇺🇸',region:'northamerica',co:{h:56,w:36,d:23,kg:null},pi:{h:43,w:33,d:20},note:'Ağırlık sınırı yok'},
-      {id:16,name:'Spirit Airlines',iata:'NK',country:'ABD',flag:'🇺🇸',region:'northamerica',co:{h:56,w:46,d:25,kg:null},pi:{h:46,w:36,d:20},note:'Carry-on ücretli'},
-      {id:17,name:'Frontier Airlines',iata:'F9',country:'ABD',flag:'🇺🇸',region:'northamerica',co:{h:61,w:41,d:25,kg:null},pi:{h:46,w:35,d:20},note:'Carry-on ücretli'},
-      {id:18,name:'Hawaiian Airlines',iata:'HA',country:'ABD',flag:'🇺🇸',region:'northamerica',co:{h:56,w:36,d:23,kg:11},pi:{h:43,w:33,d:20},note:'Hawaii iç/dış hat'},
-      {id:19,name:'Air Canada',iata:'AC',country:'Kanada',flag:'🇨🇦',region:'northamerica',co:{h:55,w:40,d:23,kg:null},pi:{h:43,w:33,d:16},note:'Kendi kaldırmalı'},
-      {id:20,name:'WestJet',iata:'WS',country:'Kanada',flag:'🇨🇦',region:'northamerica',co:{h:56,w:36,d:23,kg:null},pi:{h:41,w:33,d:15},note:'Kanada #2'},
-      {id:21,name:'Porter Airlines',iata:'PD',country:'Kanada',flag:'🇨🇦',region:'northamerica',co:{h:55,w:40,d:23,kg:null},pi:{h:43,w:33,d:16},note:'Kanada bölgesel'},
-      {id:22,name:'Aeroméxico',iata:'AM',country:'Meksika',flag:'🇲🇽',region:'northamerica',co:{h:56,w:36,d:23,kg:10},pi:{h:40,w:30,d:18},note:'Meksika ulusal'},
-      {id:30,name:'Air France',iata:'AF',country:'Fransa',flag:'🇫🇷',region:'europe',co:{h:55,w:35,d:25,kg:12},pi:{h:40,w:30,d:15},note:'Business: 18 kg'},
-      {id:31,name:'British Airways',iata:'BA',country:'İngiltere',flag:'🇬🇧',region:'europe',co:{h:56,w:45,d:25,kg:23},pi:{h:40,w:30,d:15},note:'Geniş boyut + yüksek ağırlık'},
-      {id:32,name:'Lufthansa',iata:'LH',country:'Almanya',flag:'🇩🇪',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:10},note:'Economy: 8 kg'},
-      {id:33,name:'KLM',iata:'KL',country:'Hollanda',flag:'🇳🇱',region:'europe',co:{h:55,w:35,d:25,kg:12},pi:{h:40,w:30,d:15},note:'Air France grubu'},
-      {id:34,name:'Swiss Intl Air Lines',iata:'LX',country:'İsviçre',flag:'🇨🇭',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Lufthansa grubu'},
-      {id:35,name:'Austrian Airlines',iata:'OS',country:'Avusturya',flag:'🇦🇹',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Lufthansa grubu'},
-      {id:36,name:'Brussels Airlines',iata:'SN',country:'Belçika',flag:'🇧🇪',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Lufthansa grubu'},
-      {id:37,name:'SAS Scandinavian',iata:'SK',country:'İskandinav',flag:'🇸🇪',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Go Light: sadece kişisel eşya'},
-      {id:38,name:'Norwegian Air',iata:'DY',country:'Norveç',flag:'🇳🇴',region:'europe',co:{h:55,w:40,d:23,kg:10},pi:{h:40,w:30,d:15},note:'LowFare: sadece kişisel eşya'},
-      {id:39,name:'Finnair',iata:'AY',country:'Finlandiya',flag:'🇫🇮',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Superlight: sadece kişisel eşya'},
-      {id:40,name:'Iberia',iata:'IB',country:'İspanya',flag:'🇪🇸',region:'europe',co:{h:56,w:40,d:25,kg:null},pi:{h:40,w:30,d:15},note:'Ağırlık belirtilmemiş'},
-      {id:41,name:'TAP Air Portugal',iata:'TP',country:'Portekiz',flag:'🇵🇹',region:'europe',co:{h:55,w:40,d:20,kg:8},pi:{h:40,w:20,d:25},note:'Discount: sadece kişisel eşya'},
-      {id:42,name:'LOT Polish Airlines',iata:'LO',country:'Polonya',flag:'🇵🇱',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:35,d:12},note:'Star Alliance'},
-      {id:43,name:'Icelandair',iata:'FI',country:'İzlanda',flag:'🇮🇸',region:'europe',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:30,d:15},note:'Economy Light: sadece kişisel eşya'},
-      {id:44,name:'Aer Lingus',iata:'EI',country:'İrlanda',flag:'🇮🇪',region:'europe',co:{h:55,w:40,d:24,kg:10},pi:{h:33,w:25,d:20},note:'Saver: sadece kişisel eşya'},
-      {id:45,name:'Air Serbia',iata:'JU',country:'Sırbistan',flag:'🇷🇸',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Sırbistan ulusal'},
-      {id:46,name:'airBaltic',iata:'BT',country:'Letonya',flag:'🇱🇻',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:10},note:'Baltık havayolu'},
-      {id:47,name:'Czech Airlines',iata:'OK',country:'Çekya',flag:'🇨🇿',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Çek ulusal'},
-      {id:48,name:'TAROM',iata:'RO',country:'Romanya',flag:'🇷🇴',region:'europe',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:30,d:15},note:'Romanya ulusal'},
-      {id:49,name:'Croatia Airlines',iata:'OU',country:'Hırvatistan',flag:'🇭🇷',region:'europe',co:{h:55,w:40,d:20,kg:8},pi:{h:40,w:30,d:15},note:'Star Alliance'},
-      {id:50,name:'Aegean Airlines',iata:'A3',country:'Yunanistan',flag:'🇬🇷',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Star Alliance'},
-      {id:51,name:'ITA Airways',iata:'AZ',country:'İtalya',flag:'🇮🇹',region:'europe',co:{h:55,w:35,d:25,kg:8},pi:{h:36,w:27,d:15},note:'Alitalia devamı'},
-      {id:52,name:'Air Europa',iata:'UX',country:'İspanya',flag:'🇪🇸',region:'europe',co:{h:55,w:35,d:25,kg:10},pi:{h:40,w:30,d:15},note:'SkyTeam'},
-      {id:60,name:'Ryanair',iata:'FR',country:'İrlanda',flag:'🇮🇪',region:'lowcost',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:20,d:25},note:'Priority olmadan sadece 40×20×25'},
-      {id:61,name:'easyJet',iata:'U2',country:'İngiltere',flag:'🇬🇧',region:'lowcost',co:{h:56,w:45,d:25,kg:15},pi:{h:45,w:36,d:20},note:'Carry-on ücretli ek paket'},
-      {id:62,name:'Wizz Air',iata:'W6',country:'Macaristan',flag:'🇭🇺',region:'lowcost',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:30,d:20},note:'Priority ile carry-on ücretsiz'},
-      {id:63,name:'Vueling',iata:'VY',country:'İspanya',flag:'🇪🇸',region:'lowcost',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:20,d:30},note:'Basic: sadece kişisel eşya'},
-      {id:64,name:'Transavia',iata:'HV',country:'Hollanda',flag:'🇳🇱',region:'lowcost',co:{h:55,w:40,d:25,kg:10},pi:null,note:'Tek bagaj'},
-      {id:65,name:'Eurowings',iata:'EW',country:'Almanya',flag:'🇩🇪',region:'lowcost',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:10},note:'Lufthansa düşük maliyet'},
-      {id:66,name:'Condor',iata:'DE',country:'Almanya',flag:'🇩🇪',region:'lowcost',co:{h:55,w:40,d:20,kg:8},pi:{h:40,w:30,d:10},note:'Almanya tatil'},
-      {id:67,name:'TUI fly',iata:'X3',country:'Almanya',flag:'🇩🇪',region:'lowcost',co:{h:55,w:40,d:20,kg:6},pi:{h:40,w:30,d:15},note:'TUI turizm'},
-      {id:68,name:'Volotea',iata:'V7',country:'İspanya',flag:'🇪🇸',region:'lowcost',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:20,d:30},note:'Bölgesel düşük maliyet'},
-      {id:69,name:'Norse Atlantic',iata:'N0',country:'Norveç',flag:'🇳🇴',region:'lowcost',co:{h:56,w:45,d:25,kg:10},pi:{h:40,w:30,d:15},note:'Transatlantik düşük maliyet'},
-      {id:80,name:'Emirates',iata:'EK',country:'BAE',flag:'🇦🇪',region:'middleeast',co:{h:55,w:38,d:20,kg:7},pi:{h:38,w:30,d:15},note:'Business: 2×7 kg'},
-      {id:81,name:'Qatar Airways',iata:'QR',country:'Katar',flag:'🇶🇦',region:'middleeast',co:{h:50,w:37,d:25,kg:7},pi:{h:37,w:25,d:10},note:'Business: 2 parça'},
-      {id:82,name:'Etihad Airways',iata:'EY',country:'BAE',flag:'🇦🇪',region:'middleeast',co:{h:56,w:36,d:23,kg:7},pi:{h:40,w:30,d:15},note:'Business: 2 parça'},
-      {id:83,name:'Saudia',iata:'SV',country:'S. Arabistan',flag:'🇸🇦',region:'middleeast',co:{h:56,w:36,d:23,kg:7},pi:{h:40,w:30,d:15},note:'Suudi ulusal'},
-      {id:84,name:'Gulf Air',iata:'GF',country:'Bahreyn',flag:'🇧🇭',region:'middleeast',co:{h:50,w:40,d:25,kg:6},pi:{h:40,w:30,d:15},note:'Bahreyn ulusal'},
-      {id:85,name:'Oman Air',iata:'WY',country:'Umman',flag:'🇴🇲',region:'middleeast',co:{h:56,w:36,d:23,kg:7},pi:{h:40,w:30,d:15},note:'Umman ulusal'},
-      {id:86,name:'Kuwait Airways',iata:'KU',country:'Kuveyt',flag:'🇰🇼',region:'middleeast',co:{h:56,w:36,d:23,kg:7},pi:{h:40,w:30,d:15},note:'Kuveyt ulusal'},
-      {id:87,name:'Flydubai',iata:'FZ',country:'BAE',flag:'🇦🇪',region:'middleeast',co:{h:55,w:38,d:20,kg:7},pi:{h:38,w:30,d:15},note:'Dubai düşük maliyet'},
-      {id:88,name:'Air Arabia',iata:'G9',country:'BAE',flag:'🇦🇪',region:'middleeast',co:{h:55,w:40,d:20,kg:10},pi:null,note:'Sharjah düşük maliyet'},
-      {id:89,name:'flynas',iata:'XY',country:'S. Arabistan',flag:'🇸🇦',region:'middleeast',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Suudi düşük maliyet'},
-      {id:90,name:'Royal Jordanian',iata:'RJ',country:'Ürdün',flag:'🇯🇴',region:'middleeast',co:{h:51,w:36,d:23,kg:7},pi:{h:35,w:30,d:15},note:'Ürdün ulusal'},
-      {id:91,name:'MEA',iata:'ME',country:'Lübnan',flag:'🇱🇧',region:'middleeast',co:{h:55,w:40,d:20,kg:7},pi:{h:40,w:30,d:15},note:'Lübnan ulusal'},
-      {id:100,name:'Singapore Airlines',iata:'SQ',country:'Singapur',flag:'🇸🇬',region:'asia',co:{h:55,w:36,d:23,kg:7},pi:null,note:'1 parça 7 kg'},
-      {id:101,name:'Cathay Pacific',iata:'CX',country:'Hong Kong',flag:'🇭🇰',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Economy: 7 kg'},
-      {id:102,name:'ANA',iata:'NH',country:'Japonya',flag:'🇯🇵',region:'asia',co:{h:55,w:40,d:25,kg:10},pi:null,note:'İç hat: 10 kg'},
-      {id:103,name:'Japan Airlines',iata:'JL',country:'Japonya',flag:'🇯🇵',region:'asia',co:{h:55,w:40,d:25,kg:10},pi:null,note:'İç hat: 10 kg'},
-      {id:104,name:'Korean Air',iata:'KE',country:'G. Kore',flag:'🇰🇷',region:'asia',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:30,d:15},note:'Economy: 10 kg'},
-      {id:105,name:'Asiana Airlines',iata:'OZ',country:'G. Kore',flag:'🇰🇷',region:'asia',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:30,d:15},note:'Korean Air ile birleşti'},
-      {id:106,name:'Thai Airways',iata:'TG',country:'Tayland',flag:'🇹🇭',region:'asia',co:{h:56,w:45,d:25,kg:7},pi:null,note:'Economy: 7 kg'},
-      {id:107,name:'Vietnam Airlines',iata:'VN',country:'Vietnam',flag:'🇻🇳',region:'asia',co:{h:56,w:36,d:23,kg:10},pi:null,note:'Dış hat: 10 kg'},
-      {id:108,name:'Malaysia Airlines',iata:'MH',country:'Malezya',flag:'🇲🇾',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Economy: 7 kg'},
-      {id:109,name:'Garuda Indonesia',iata:'GA',country:'Endonezya',flag:'🇮🇩',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Economy: 7 kg'},
-      {id:110,name:'Philippine Airlines',iata:'PR',country:'Filipinler',flag:'🇵🇭',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Economy: 7 kg'},
-      {id:111,name:'Air India',iata:'AI',country:'Hindistan',flag:'🇮🇳',region:'asia',co:{h:55,w:40,d:20,kg:8},pi:{h:40,w:30,d:15},note:'Economy: 8 kg'},
-      {id:112,name:'Air China',iata:'CA',country:'Çin',flag:'🇨🇳',region:'asia',co:{h:55,w:40,d:20,kg:5},pi:null,note:'Katı ağırlık limiti'},
-      {id:113,name:'China Eastern',iata:'MU',country:'Çin',flag:'🇨🇳',region:'asia',co:{h:55,w:40,d:20,kg:5},pi:null,note:'Shanghai merkezli'},
-      {id:114,name:'China Southern',iata:'CZ',country:'Çin',flag:'🇨🇳',region:'asia',co:{h:55,w:40,d:20,kg:5},pi:null,note:'Çin en büyüğü'},
-      {id:115,name:'Hainan Airlines',iata:'HU',country:'Çin',flag:'🇨🇳',region:'asia',co:{h:55,w:40,d:20,kg:10},pi:null,note:'5 yıldızlı'},
-      {id:116,name:'EVA Air',iata:'BR',country:'Tayvan',flag:'🇹🇼',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Star Alliance'},
-      {id:117,name:'China Airlines',iata:'CI',country:'Tayvan',flag:'🇹🇼',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Tayvan ulusal'},
-      {id:118,name:'Starlux Airlines',iata:'JX',country:'Tayvan',flag:'🇹🇼',region:'asia',co:{h:56,w:40,d:25,kg:7},pi:null,note:'Premium Tayvan'},
-      {id:119,name:'SriLankan Airlines',iata:'UL',country:'Sri Lanka',flag:'🇱🇰',region:'asia',co:{h:55,w:40,d:23,kg:7},pi:null,note:'Sri Lanka ulusal'},
-      {id:130,name:'IndiGo',iata:'6E',country:'Hindistan',flag:'🇮🇳',region:'asia',co:{h:55,w:35,d:25,kg:7},pi:null,note:'Hindistan #1 düşük maliyet'},
-      {id:131,name:'SpiceJet',iata:'SG',country:'Hindistan',flag:'🇮🇳',region:'asia',co:{h:55,w:40,d:20,kg:7},pi:null,note:'Hindistan düşük maliyet'},
-      {id:132,name:'AirAsia',iata:'AK',country:'Malezya',flag:'🇲🇾',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:{h:40,w:30,d:10},note:'Asya düşük maliyet lideri'},
-      {id:133,name:'Scoot',iata:'TR',country:'Singapur',flag:'🇸🇬',region:'asia',co:{h:54,w:38,d:23,kg:10},pi:null,note:'SIA düşük maliyet'},
-      {id:134,name:'Cebu Pacific',iata:'5J',country:'Filipinler',flag:'🇵🇭',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Filipinler düşük maliyet'},
-      {id:135,name:'Lion Air',iata:'JT',country:'Endonezya',flag:'🇮🇩',region:'asia',co:{h:55,w:40,d:20,kg:7},pi:null,note:'Endonezya düşük maliyet'},
-      {id:136,name:'VietJet Air',iata:'VJ',country:'Vietnam',flag:'🇻🇳',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Vietnam düşük maliyet'},
-      {id:137,name:'Peach Aviation',iata:'MM',country:'Japonya',flag:'🇯🇵',region:'asia',co:{h:50,w:40,d:25,kg:7},pi:null,note:'Japonya düşük maliyet'},
-      {id:138,name:'Jeju Air',iata:'7C',country:'G. Kore',flag:'🇰🇷',region:'asia',co:{h:55,w:40,d:20,kg:10},pi:null,note:'G. Kore düşük maliyet'},
-      {id:150,name:'Qantas',iata:'QF',country:'Avustralya',flag:'🇦🇺',region:'oceania',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Economy: 7 kg'},
-      {id:151,name:'Air New Zealand',iata:'NZ',country:'Y. Zelanda',flag:'🇳🇿',region:'oceania',co:{h:56,w:36,d:23,kg:7},pi:{h:36,w:26,d:14},note:'Economy: 7 kg toplam'},
-      {id:152,name:'Virgin Australia',iata:'VA',country:'Avustralya',flag:'🇦🇺',region:'oceania',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Economy: 7 kg'},
-      {id:153,name:'Jetstar',iata:'JQ',country:'Avustralya',flag:'🇦🇺',region:'oceania',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Carry-on ücretli'},
-      {id:160,name:'LATAM Airlines',iata:'LA',country:'Şili',flag:'🇨🇱',region:'southamerica',co:{h:55,w:35,d:25,kg:10},pi:{h:45,w:35,d:18},note:'Güney Amerika #1'},
-      {id:161,name:'Avianca',iata:'AV',country:'Kolombiya',flag:'🇨🇴',region:'southamerica',co:{h:55,w:40,d:25,kg:10},pi:{h:45,w:35,d:18},note:'Star Alliance'},
-      {id:162,name:'GOL',iata:'G3',country:'Brezilya',flag:'🇧🇷',region:'southamerica',co:{h:55,w:35,d:25,kg:10},pi:{h:35,w:25,d:20},note:'Brezilya düşük maliyet'},
-      {id:163,name:'Copa Airlines',iata:'CM',country:'Panama',flag:'🇵🇦',region:'southamerica',co:{h:56,w:36,d:23,kg:10},pi:{h:43,w:30,d:18},note:'Panama hub'},
-      {id:164,name:'Azul',iata:'AD',country:'Brezilya',flag:'🇧🇷',region:'southamerica',co:{h:55,w:35,d:25,kg:10},pi:null,note:'Brezilya havayolu'},
-      {id:165,name:'JetSMART',iata:'JA',country:'Şili',flag:'🇨🇱',region:'southamerica',co:{h:55,w:40,d:20,kg:10},pi:{h:45,w:35,d:18},note:'G. Amerika düşük maliyet'},
-      {id:170,name:'Ethiopian Airlines',iata:'ET',country:'Etiyopya',flag:'🇪🇹',region:'africa',co:{h:55,w:40,d:23,kg:7},pi:null,note:'Afrika #1'},
-      {id:171,name:'South African Airways',iata:'SA',country:'G. Afrika',flag:'🇿🇦',region:'africa',co:{h:56,w:36,d:23,kg:8},pi:null,note:'G. Afrika ulusal'},
-      {id:172,name:'Kenya Airways',iata:'KQ',country:'Kenya',flag:'🇰🇪',region:'africa',co:{h:55,w:36,d:23,kg:7},pi:{h:40,w:30,d:15},note:'SkyTeam'},
-      {id:173,name:'Royal Air Maroc',iata:'AT',country:'Fas',flag:'🇲🇦',region:'africa',co:{h:55,w:40,d:23,kg:10},pi:{h:40,w:30,d:15},note:'Oneworld'},
-      {id:174,name:'EgyptAir',iata:'MS',country:'Mısır',flag:'🇪🇬',region:'africa',co:{h:55,w:40,d:20,kg:8},pi:null,note:'Star Alliance'},
-      {id:175,name:'Tunisair',iata:'TU',country:'Tunus',flag:'🇹🇳',region:'africa',co:{h:55,w:40,d:20,kg:8},pi:null,note:'Tunus ulusal'},
-      {id:180,name:'Aeroflot',iata:'SU',country:'Rusya',flag:'🇷🇺',region:'easteurope',co:{h:55,w:40,d:25,kg:10},pi:null,note:'Rusya ulusal'},
-      {id:181,name:'Ukraine Intl Airlines',iata:'PS',country:'Ukrayna',flag:'🇺🇦',region:'easteurope',co:{h:55,w:40,d:20,kg:7},pi:{h:40,w:30,d:15},note:'Ukrayna ulusal'},
-      {id:182,name:'AZAL Azerbaijan',iata:'J2',country:'Azerbaycan',flag:'🇦🇿',region:'easteurope',co:{h:55,w:40,d:20,kg:8},pi:null,note:'Azerbaycan ulusal'},
-      {id:183,name:'Air Astana',iata:'KC',country:'Kazakistan',flag:'🇰🇿',region:'easteurope',co:{h:55,w:40,d:23,kg:8},pi:null,note:'Kazakistan ulusal'},
-      {id:184,name:'Georgian Airways',iata:'A9',country:'Gürcistan',flag:'🇬🇪',region:'easteurope',co:{h:55,w:40,d:20,kg:8},pi:null,note:'Gürcistan ulusal'},
-      {id:185,name:'Wizz Air Abu Dhabi',iata:'5W',country:'BAE',flag:'🇦🇪',region:'middleeast',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:30,d:20},note:'Abu Dhabi düşük maliyet'},
+  <script>
+    // ===== DATA =====
+    var airlines = [
+      {id:1,name:'Turkish Airlines',iata:'TK',country:'Türkiye',flag:'\u{1F1F9}\u{1F1F7}',region:'turkey',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Economy: 1 carry-on + 1 ki\u015fisel e\u015fya'},
+      {id:2,name:'Pegasus Airlines',iata:'PC',country:'Türkiye',flag:'\u{1F1F9}\u{1F1F7}',region:'turkey',co:{h:55,w:40,d:20,kg:8},pi:{h:40,w:30,d:15},note:'Essentials: sadece ki\u015fisel e\u015fya ücretsiz'},
+      {id:3,name:'SunExpress',iata:'XQ',country:'Türkiye',flag:'\u{1F1F9}\u{1F1F7}',region:'turkey',co:{h:55,w:40,d:20,kg:8},pi:{h:40,w:30,d:15},note:'Charter ve tarifeli uçu\u015flar'},
+      {id:4,name:'AnadoluJet',iata:'AJ',country:'Türkiye',flag:'\u{1F1F9}\u{1F1F7}',region:'turkey',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'THY iç hat markas\u0131'},
+      {id:5,name:'Corendon Airlines',iata:'XC',country:'Türkiye',flag:'\u{1F1F9}\u{1F1F7}',region:'turkey',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:30,d:15},note:'Turizm odakl\u0131 charter'},
+      {id:6,name:'Onur Air',iata:'8Q',country:'Türkiye',flag:'\u{1F1F9}\u{1F1F7}',region:'turkey',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'\u0130ç hat ve charter'},
+      {id:10,name:'American Airlines',iata:'AA',country:'ABD',flag:'\u{1F1FA}\u{1F1F8}',region:'northamerica',co:{h:56,w:36,d:23,kg:null},pi:{h:45,w:35,d:20},note:'A\u011f\u0131rl\u0131k s\u0131n\u0131r\u0131 yok'},
+      {id:11,name:'Delta Air Lines',iata:'DL',country:'ABD',flag:'\u{1F1FA}\u{1F1F8}',region:'northamerica',co:{h:56,w:36,d:23,kg:null},pi:{h:45,w:35,d:20},note:'A\u011f\u0131rl\u0131k s\u0131n\u0131r\u0131 yok'},
+      {id:12,name:'United Airlines',iata:'UA',country:'ABD',flag:'\u{1F1FA}\u{1F1F8}',region:'northamerica',co:{h:56,w:35,d:22,kg:null},pi:{h:43,w:25,d:22},note:'A\u011f\u0131rl\u0131k s\u0131n\u0131r\u0131 yok'},
+      {id:13,name:'Southwest Airlines',iata:'WN',country:'ABD',flag:'\u{1F1FA}\u{1F1F8}',region:'northamerica',co:{h:61,w:41,d:25,kg:null},pi:{h:46,w:34,d:22},note:'2 ücretsiz bagaj'},
+      {id:14,name:'JetBlue Airways',iata:'B6',country:'ABD',flag:'\u{1F1FA}\u{1F1F8}',region:'northamerica',co:{h:56,w:36,d:23,kg:null},pi:{h:43,w:33,d:20},note:'A\u011f\u0131rl\u0131k s\u0131n\u0131r\u0131 yok'},
+      {id:15,name:'Alaska Airlines',iata:'AS',country:'ABD',flag:'\u{1F1FA}\u{1F1F8}',region:'northamerica',co:{h:56,w:36,d:23,kg:null},pi:{h:43,w:33,d:20},note:'A\u011f\u0131rl\u0131k s\u0131n\u0131r\u0131 yok'},
+      {id:16,name:'Spirit Airlines',iata:'NK',country:'ABD',flag:'\u{1F1FA}\u{1F1F8}',region:'northamerica',co:{h:56,w:46,d:25,kg:null},pi:{h:46,w:36,d:20},note:'Carry-on ücretli'},
+      {id:17,name:'Frontier Airlines',iata:'F9',country:'ABD',flag:'\u{1F1FA}\u{1F1F8}',region:'northamerica',co:{h:61,w:41,d:25,kg:null},pi:{h:46,w:35,d:20},note:'Carry-on ücretli'},
+      {id:18,name:'Hawaiian Airlines',iata:'HA',country:'ABD',flag:'\u{1F1FA}\u{1F1F8}',region:'northamerica',co:{h:56,w:36,d:23,kg:11},pi:{h:43,w:33,d:20},note:'Hawaii iç/d\u0131\u015f hat'},
+      {id:19,name:'Air Canada',iata:'AC',country:'Kanada',flag:'\u{1F1E8}\u{1F1E6}',region:'northamerica',co:{h:55,w:40,d:23,kg:null},pi:{h:43,w:33,d:16},note:'Kendi kald\u0131rmal\u0131'},
+      {id:20,name:'WestJet',iata:'WS',country:'Kanada',flag:'\u{1F1E8}\u{1F1E6}',region:'northamerica',co:{h:56,w:36,d:23,kg:null},pi:{h:41,w:33,d:15},note:'Kanada #2'},
+      {id:21,name:'Porter Airlines',iata:'PD',country:'Kanada',flag:'\u{1F1E8}\u{1F1E6}',region:'northamerica',co:{h:55,w:40,d:23,kg:null},pi:{h:43,w:33,d:16},note:'Kanada bölgesel'},
+      {id:22,name:'Aerom\u00e9xico',iata:'AM',country:'Meksika',flag:'\u{1F1F2}\u{1F1FD}',region:'northamerica',co:{h:56,w:36,d:23,kg:10},pi:{h:40,w:30,d:18},note:'Meksika ulusal'},
+      {id:30,name:'Air France',iata:'AF',country:'Fransa',flag:'\u{1F1EB}\u{1F1F7}',region:'europe',co:{h:55,w:35,d:25,kg:12},pi:{h:40,w:30,d:15},note:'Business: 18 kg'},
+      {id:31,name:'British Airways',iata:'BA',country:'\u0130ngiltere',flag:'\u{1F1EC}\u{1F1E7}',region:'europe',co:{h:56,w:45,d:25,kg:23},pi:{h:40,w:30,d:15},note:'Geni\u015f boyut + yüksek a\u011f\u0131rl\u0131k'},
+      {id:32,name:'Lufthansa',iata:'LH',country:'Almanya',flag:'\u{1F1E9}\u{1F1EA}',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:10},note:'Economy: 8 kg'},
+      {id:33,name:'KLM',iata:'KL',country:'Hollanda',flag:'\u{1F1F3}\u{1F1F1}',region:'europe',co:{h:55,w:35,d:25,kg:12},pi:{h:40,w:30,d:15},note:'Air France grubu'},
+      {id:34,name:'Swiss Intl Air Lines',iata:'LX',country:'\u0130sviçre',flag:'\u{1F1E8}\u{1F1ED}',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Lufthansa grubu'},
+      {id:35,name:'Austrian Airlines',iata:'OS',country:'Avusturya',flag:'\u{1F1E6}\u{1F1F9}',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Lufthansa grubu'},
+      {id:36,name:'Brussels Airlines',iata:'SN',country:'Belçika',flag:'\u{1F1E7}\u{1F1EA}',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Lufthansa grubu'},
+      {id:37,name:'SAS Scandinavian',iata:'SK',country:'\u0130skandinav',flag:'\u{1F1F8}\u{1F1EA}',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Go Light: sadece ki\u015fisel e\u015fya'},
+      {id:38,name:'Norwegian Air',iata:'DY',country:'Norveç',flag:'\u{1F1F3}\u{1F1F4}',region:'europe',co:{h:55,w:40,d:23,kg:10},pi:{h:40,w:30,d:15},note:'LowFare: sadece ki\u015fisel e\u015fya'},
+      {id:39,name:'Finnair',iata:'AY',country:'Finlandiya',flag:'\u{1F1EB}\u{1F1EE}',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Superlight: sadece ki\u015fisel e\u015fya'},
+      {id:40,name:'Iberia',iata:'IB',country:'\u0130spanya',flag:'\u{1F1EA}\u{1F1F8}',region:'europe',co:{h:56,w:40,d:25,kg:null},pi:{h:40,w:30,d:15},note:'A\u011f\u0131rl\u0131k belirtilmemi\u015f'},
+      {id:41,name:'TAP Air Portugal',iata:'TP',country:'Portekiz',flag:'\u{1F1F5}\u{1F1F9}',region:'europe',co:{h:55,w:40,d:20,kg:8},pi:{h:40,w:20,d:25},note:'Discount: sadece ki\u015fisel e\u015fya'},
+      {id:42,name:'LOT Polish Airlines',iata:'LO',country:'Polonya',flag:'\u{1F1F5}\u{1F1F1}',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:35,d:12},note:'Star Alliance'},
+      {id:43,name:'Icelandair',iata:'FI',country:'\u0130zlanda',flag:'\u{1F1EE}\u{1F1F8}',region:'europe',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:30,d:15},note:'Economy Light: sadece ki\u015fisel e\u015fya'},
+      {id:44,name:'Aer Lingus',iata:'EI',country:'\u0130rlanda',flag:'\u{1F1EE}\u{1F1EA}',region:'europe',co:{h:55,w:40,d:24,kg:10},pi:{h:33,w:25,d:20},note:'Saver: sadece ki\u015fisel e\u015fya'},
+      {id:45,name:'Air Serbia',iata:'JU',country:'S\u0131rbistan',flag:'\u{1F1F7}\u{1F1F8}',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'S\u0131rbistan ulusal'},
+      {id:46,name:'airBaltic',iata:'BT',country:'Letonya',flag:'\u{1F1F1}\u{1F1FB}',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:10},note:'Balt\u0131k havayolu'},
+      {id:47,name:'Czech Airlines',iata:'OK',country:'Çekya',flag:'\u{1F1E8}\u{1F1FF}',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Çek ulusal'},
+      {id:48,name:'TAROM',iata:'RO',country:'Romanya',flag:'\u{1F1F7}\u{1F1F4}',region:'europe',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:30,d:15},note:'Romanya ulusal'},
+      {id:49,name:'Croatia Airlines',iata:'OU',country:'H\u0131rvatistan',flag:'\u{1F1ED}\u{1F1F7}',region:'europe',co:{h:55,w:40,d:20,kg:8},pi:{h:40,w:30,d:15},note:'Star Alliance'},
+      {id:50,name:'Aegean Airlines',iata:'A3',country:'Yunanistan',flag:'\u{1F1EC}\u{1F1F7}',region:'europe',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:15},note:'Star Alliance'},
+      {id:51,name:'ITA Airways',iata:'AZ',country:'\u0130talya',flag:'\u{1F1EE}\u{1F1F9}',region:'europe',co:{h:55,w:35,d:25,kg:8},pi:{h:36,w:27,d:15},note:'Alitalia devam\u0131'},
+      {id:52,name:'Air Europa',iata:'UX',country:'\u0130spanya',flag:'\u{1F1EA}\u{1F1F8}',region:'europe',co:{h:55,w:35,d:25,kg:10},pi:{h:40,w:30,d:15},note:'SkyTeam'},
+      {id:60,name:'Ryanair',iata:'FR',country:'\u0130rlanda',flag:'\u{1F1EE}\u{1F1EA}',region:'lowcost',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:20,d:25},note:'Priority olmadan sadece 40\u00d720\u00d725'},
+      {id:61,name:'easyJet',iata:'U2',country:'\u0130ngiltere',flag:'\u{1F1EC}\u{1F1E7}',region:'lowcost',co:{h:56,w:45,d:25,kg:15},pi:{h:45,w:36,d:20},note:'Carry-on ücretli ek paket'},
+      {id:62,name:'Wizz Air',iata:'W6',country:'Macaristan',flag:'\u{1F1ED}\u{1F1FA}',region:'lowcost',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:30,d:20},note:'Priority ile carry-on ücretsiz'},
+      {id:63,name:'Vueling',iata:'VY',country:'\u0130spanya',flag:'\u{1F1EA}\u{1F1F8}',region:'lowcost',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:20,d:30},note:'Basic: sadece ki\u015fisel e\u015fya'},
+      {id:64,name:'Transavia',iata:'HV',country:'Hollanda',flag:'\u{1F1F3}\u{1F1F1}',region:'lowcost',co:{h:55,w:40,d:25,kg:10},pi:null,note:'Tek bagaj'},
+      {id:65,name:'Eurowings',iata:'EW',country:'Almanya',flag:'\u{1F1E9}\u{1F1EA}',region:'lowcost',co:{h:55,w:40,d:23,kg:8},pi:{h:40,w:30,d:10},note:'Lufthansa dü\u015fük maliyet'},
+      {id:66,name:'Condor',iata:'DE',country:'Almanya',flag:'\u{1F1E9}\u{1F1EA}',region:'lowcost',co:{h:55,w:40,d:20,kg:8},pi:{h:40,w:30,d:10},note:'Almanya tatil'},
+      {id:67,name:'TUI fly',iata:'X3',country:'Almanya',flag:'\u{1F1E9}\u{1F1EA}',region:'lowcost',co:{h:55,w:40,d:20,kg:6},pi:{h:40,w:30,d:15},note:'TUI turizm'},
+      {id:68,name:'Volotea',iata:'V7',country:'\u0130spanya',flag:'\u{1F1EA}\u{1F1F8}',region:'lowcost',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:20,d:30},note:'Bölgesel dü\u015fük maliyet'},
+      {id:69,name:'Norse Atlantic',iata:'N0',country:'Norveç',flag:'\u{1F1F3}\u{1F1F4}',region:'lowcost',co:{h:56,w:45,d:25,kg:10},pi:{h:40,w:30,d:15},note:'Transatlantik dü\u015fük maliyet'},
+      {id:80,name:'Emirates',iata:'EK',country:'BAE',flag:'\u{1F1E6}\u{1F1EA}',region:'middleeast',co:{h:55,w:38,d:20,kg:7},pi:{h:38,w:30,d:15},note:'Business: 2\u00d77 kg'},
+      {id:81,name:'Qatar Airways',iata:'QR',country:'Katar',flag:'\u{1F1F6}\u{1F1E6}',region:'middleeast',co:{h:50,w:37,d:25,kg:7},pi:{h:37,w:25,d:10},note:'Business: 2 parça'},
+      {id:82,name:'Etihad Airways',iata:'EY',country:'BAE',flag:'\u{1F1E6}\u{1F1EA}',region:'middleeast',co:{h:56,w:36,d:23,kg:7},pi:{h:40,w:30,d:15},note:'Business: 2 parça'},
+      {id:83,name:'Saudia',iata:'SV',country:'S. Arabistan',flag:'\u{1F1F8}\u{1F1E6}',region:'middleeast',co:{h:56,w:36,d:23,kg:7},pi:{h:40,w:30,d:15},note:'Suudi ulusal'},
+      {id:84,name:'Gulf Air',iata:'GF',country:'Bahreyn',flag:'\u{1F1E7}\u{1F1ED}',region:'middleeast',co:{h:50,w:40,d:25,kg:6},pi:{h:40,w:30,d:15},note:'Bahreyn ulusal'},
+      {id:85,name:'Oman Air',iata:'WY',country:'Umman',flag:'\u{1F1F4}\u{1F1F2}',region:'middleeast',co:{h:56,w:36,d:23,kg:7},pi:{h:40,w:30,d:15},note:'Umman ulusal'},
+      {id:86,name:'Kuwait Airways',iata:'KU',country:'Kuveyt',flag:'\u{1F1F0}\u{1F1FC}',region:'middleeast',co:{h:56,w:36,d:23,kg:7},pi:{h:40,w:30,d:15},note:'Kuveyt ulusal'},
+      {id:87,name:'Flydubai',iata:'FZ',country:'BAE',flag:'\u{1F1E6}\u{1F1EA}',region:'middleeast',co:{h:55,w:38,d:20,kg:7},pi:{h:38,w:30,d:15},note:'Dubai dü\u015fük maliyet'},
+      {id:88,name:'Air Arabia',iata:'G9',country:'BAE',flag:'\u{1F1E6}\u{1F1EA}',region:'middleeast',co:{h:55,w:40,d:20,kg:10},pi:null,note:'Sharjah dü\u015fük maliyet'},
+      {id:89,name:'flynas',iata:'XY',country:'S. Arabistan',flag:'\u{1F1F8}\u{1F1E6}',region:'middleeast',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Suudi dü\u015fük maliyet'},
+      {id:90,name:'Royal Jordanian',iata:'RJ',country:'\u00dcrdün',flag:'\u{1F1EF}\u{1F1F4}',region:'middleeast',co:{h:51,w:36,d:23,kg:7},pi:{h:35,w:30,d:15},note:'\u00dcrdün ulusal'},
+      {id:91,name:'MEA',iata:'ME',country:'Lübnan',flag:'\u{1F1F1}\u{1F1E7}',region:'middleeast',co:{h:55,w:40,d:20,kg:7},pi:{h:40,w:30,d:15},note:'Lübnan ulusal'},
+      {id:100,name:'Singapore Airlines',iata:'SQ',country:'Singapur',flag:'\u{1F1F8}\u{1F1EC}',region:'asia',co:{h:55,w:36,d:23,kg:7},pi:null,note:'1 parça 7 kg'},
+      {id:101,name:'Cathay Pacific',iata:'CX',country:'Hong Kong',flag:'\u{1F1ED}\u{1F1F0}',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Economy: 7 kg'},
+      {id:102,name:'ANA',iata:'NH',country:'Japonya',flag:'\u{1F1EF}\u{1F1F5}',region:'asia',co:{h:55,w:40,d:25,kg:10},pi:null,note:'\u0130ç hat: 10 kg'},
+      {id:103,name:'Japan Airlines',iata:'JL',country:'Japonya',flag:'\u{1F1EF}\u{1F1F5}',region:'asia',co:{h:55,w:40,d:25,kg:10},pi:null,note:'\u0130ç hat: 10 kg'},
+      {id:104,name:'Korean Air',iata:'KE',country:'G. Kore',flag:'\u{1F1F0}\u{1F1F7}',region:'asia',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:30,d:15},note:'Economy: 10 kg'},
+      {id:105,name:'Asiana Airlines',iata:'OZ',country:'G. Kore',flag:'\u{1F1F0}\u{1F1F7}',region:'asia',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:30,d:15},note:'Korean Air ile birle\u015fti'},
+      {id:106,name:'Thai Airways',iata:'TG',country:'Tayland',flag:'\u{1F1F9}\u{1F1ED}',region:'asia',co:{h:56,w:45,d:25,kg:7},pi:null,note:'Economy: 7 kg'},
+      {id:107,name:'Vietnam Airlines',iata:'VN',country:'Vietnam',flag:'\u{1F1FB}\u{1F1F3}',region:'asia',co:{h:56,w:36,d:23,kg:10},pi:null,note:'D\u0131\u015f hat: 10 kg'},
+      {id:108,name:'Malaysia Airlines',iata:'MH',country:'Malezya',flag:'\u{1F1F2}\u{1F1FE}',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Economy: 7 kg'},
+      {id:109,name:'Garuda Indonesia',iata:'GA',country:'Endonezya',flag:'\u{1F1EE}\u{1F1E9}',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Economy: 7 kg'},
+      {id:110,name:'Philippine Airlines',iata:'PR',country:'Filipinler',flag:'\u{1F1F5}\u{1F1ED}',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Economy: 7 kg'},
+      {id:111,name:'Air India',iata:'AI',country:'Hindistan',flag:'\u{1F1EE}\u{1F1F3}',region:'asia',co:{h:55,w:40,d:20,kg:8},pi:{h:40,w:30,d:15},note:'Economy: 8 kg'},
+      {id:112,name:'Air China',iata:'CA',country:'Çin',flag:'\u{1F1E8}\u{1F1F3}',region:'asia',co:{h:55,w:40,d:20,kg:5},pi:null,note:'Kat\u0131 a\u011f\u0131rl\u0131k limiti'},
+      {id:113,name:'China Eastern',iata:'MU',country:'Çin',flag:'\u{1F1E8}\u{1F1F3}',region:'asia',co:{h:55,w:40,d:20,kg:5},pi:null,note:'Shanghai merkezli'},
+      {id:114,name:'China Southern',iata:'CZ',country:'Çin',flag:'\u{1F1E8}\u{1F1F3}',region:'asia',co:{h:55,w:40,d:20,kg:5},pi:null,note:'Çin en büyü\u011fü'},
+      {id:115,name:'Hainan Airlines',iata:'HU',country:'Çin',flag:'\u{1F1E8}\u{1F1F3}',region:'asia',co:{h:55,w:40,d:20,kg:10},pi:null,note:'5 y\u0131ld\u0131zl\u0131'},
+      {id:116,name:'EVA Air',iata:'BR',country:'Tayvan',flag:'\u{1F1F9}\u{1F1FC}',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Star Alliance'},
+      {id:117,name:'China Airlines',iata:'CI',country:'Tayvan',flag:'\u{1F1F9}\u{1F1FC}',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Tayvan ulusal'},
+      {id:118,name:'Starlux Airlines',iata:'JX',country:'Tayvan',flag:'\u{1F1F9}\u{1F1FC}',region:'asia',co:{h:56,w:40,d:25,kg:7},pi:null,note:'Premium Tayvan'},
+      {id:119,name:'SriLankan Airlines',iata:'UL',country:'Sri Lanka',flag:'\u{1F1F1}\u{1F1F0}',region:'asia',co:{h:55,w:40,d:23,kg:7},pi:null,note:'Sri Lanka ulusal'},
+      {id:130,name:'IndiGo',iata:'6E',country:'Hindistan',flag:'\u{1F1EE}\u{1F1F3}',region:'asia',co:{h:55,w:35,d:25,kg:7},pi:null,note:'Hindistan #1 dü\u015fük maliyet'},
+      {id:131,name:'SpiceJet',iata:'SG',country:'Hindistan',flag:'\u{1F1EE}\u{1F1F3}',region:'asia',co:{h:55,w:40,d:20,kg:7},pi:null,note:'Hindistan dü\u015fük maliyet'},
+      {id:132,name:'AirAsia',iata:'AK',country:'Malezya',flag:'\u{1F1F2}\u{1F1FE}',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:{h:40,w:30,d:10},note:'Asya dü\u015fük maliyet lideri'},
+      {id:133,name:'Scoot',iata:'TR',country:'Singapur',flag:'\u{1F1F8}\u{1F1EC}',region:'asia',co:{h:54,w:38,d:23,kg:10},pi:null,note:'SIA dü\u015fük maliyet'},
+      {id:134,name:'Cebu Pacific',iata:'5J',country:'Filipinler',flag:'\u{1F1F5}\u{1F1ED}',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Filipinler dü\u015fük maliyet'},
+      {id:135,name:'Lion Air',iata:'JT',country:'Endonezya',flag:'\u{1F1EE}\u{1F1E9}',region:'asia',co:{h:55,w:40,d:20,kg:7},pi:null,note:'Endonezya dü\u015fük maliyet'},
+      {id:136,name:'VietJet Air',iata:'VJ',country:'Vietnam',flag:'\u{1F1FB}\u{1F1F3}',region:'asia',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Vietnam dü\u015fük maliyet'},
+      {id:137,name:'Peach Aviation',iata:'MM',country:'Japonya',flag:'\u{1F1EF}\u{1F1F5}',region:'asia',co:{h:50,w:40,d:25,kg:7},pi:null,note:'Japonya dü\u015fük maliyet'},
+      {id:138,name:'Jeju Air',iata:'7C',country:'G. Kore',flag:'\u{1F1F0}\u{1F1F7}',region:'asia',co:{h:55,w:40,d:20,kg:10},pi:null,note:'G. Kore dü\u015fük maliyet'},
+      {id:150,name:'Qantas',iata:'QF',country:'Avustralya',flag:'\u{1F1E6}\u{1F1FA}',region:'oceania',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Economy: 7 kg'},
+      {id:151,name:'Air New Zealand',iata:'NZ',country:'Y. Zelanda',flag:'\u{1F1F3}\u{1F1FF}',region:'oceania',co:{h:56,w:36,d:23,kg:7},pi:{h:36,w:26,d:14},note:'Economy: 7 kg toplam'},
+      {id:152,name:'Virgin Australia',iata:'VA',country:'Avustralya',flag:'\u{1F1E6}\u{1F1FA}',region:'oceania',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Economy: 7 kg'},
+      {id:153,name:'Jetstar',iata:'JQ',country:'Avustralya',flag:'\u{1F1E6}\u{1F1FA}',region:'oceania',co:{h:56,w:36,d:23,kg:7},pi:null,note:'Carry-on ücretli'},
+      {id:160,name:'LATAM Airlines',iata:'LA',country:'\u015eili',flag:'\u{1F1E8}\u{1F1F1}',region:'southamerica',co:{h:55,w:35,d:25,kg:10},pi:{h:45,w:35,d:18},note:'Güney Amerika #1'},
+      {id:161,name:'Avianca',iata:'AV',country:'Kolombiya',flag:'\u{1F1E8}\u{1F1F4}',region:'southamerica',co:{h:55,w:40,d:25,kg:10},pi:{h:45,w:35,d:18},note:'Star Alliance'},
+      {id:162,name:'GOL',iata:'G3',country:'Brezilya',flag:'\u{1F1E7}\u{1F1F7}',region:'southamerica',co:{h:55,w:35,d:25,kg:10},pi:{h:35,w:25,d:20},note:'Brezilya dü\u015fük maliyet'},
+      {id:163,name:'Copa Airlines',iata:'CM',country:'Panama',flag:'\u{1F1F5}\u{1F1E6}',region:'southamerica',co:{h:56,w:36,d:23,kg:10},pi:{h:43,w:30,d:18},note:'Panama hub'},
+      {id:164,name:'Azul',iata:'AD',country:'Brezilya',flag:'\u{1F1E7}\u{1F1F7}',region:'southamerica',co:{h:55,w:35,d:25,kg:10},pi:null,note:'Brezilya havayolu'},
+      {id:165,name:'JetSMART',iata:'JA',country:'\u015eili',flag:'\u{1F1E8}\u{1F1F1}',region:'southamerica',co:{h:55,w:40,d:20,kg:10},pi:{h:45,w:35,d:18},note:'G. Amerika dü\u015fük maliyet'},
+      {id:170,name:'Ethiopian Airlines',iata:'ET',country:'Etiyopya',flag:'\u{1F1EA}\u{1F1F9}',region:'africa',co:{h:55,w:40,d:23,kg:7},pi:null,note:'Afrika #1'},
+      {id:171,name:'South African Airways',iata:'SA',country:'G. Afrika',flag:'\u{1F1FF}\u{1F1E6}',region:'africa',co:{h:56,w:36,d:23,kg:8},pi:null,note:'G. Afrika ulusal'},
+      {id:172,name:'Kenya Airways',iata:'KQ',country:'Kenya',flag:'\u{1F1F0}\u{1F1EA}',region:'africa',co:{h:55,w:36,d:23,kg:7},pi:{h:40,w:30,d:15},note:'SkyTeam'},
+      {id:173,name:'Royal Air Maroc',iata:'AT',country:'Fas',flag:'\u{1F1F2}\u{1F1E6}',region:'africa',co:{h:55,w:40,d:23,kg:10},pi:{h:40,w:30,d:15},note:'Oneworld'},
+      {id:174,name:'EgyptAir',iata:'MS',country:'M\u0131s\u0131r',flag:'\u{1F1EA}\u{1F1EC}',region:'africa',co:{h:55,w:40,d:20,kg:8},pi:null,note:'Star Alliance'},
+      {id:175,name:'Tunisair',iata:'TU',country:'Tunus',flag:'\u{1F1F9}\u{1F1F3}',region:'africa',co:{h:55,w:40,d:20,kg:8},pi:null,note:'Tunus ulusal'},
+      {id:180,name:'Aeroflot',iata:'SU',country:'Rusya',flag:'\u{1F1F7}\u{1F1FA}',region:'easteurope',co:{h:55,w:40,d:25,kg:10},pi:null,note:'Rusya ulusal'},
+      {id:181,name:'Ukraine Intl Airlines',iata:'PS',country:'Ukrayna',flag:'\u{1F1FA}\u{1F1E6}',region:'easteurope',co:{h:55,w:40,d:20,kg:7},pi:{h:40,w:30,d:15},note:'Ukrayna ulusal'},
+      {id:182,name:'AZAL Azerbaijan',iata:'J2',country:'Azerbaycan',flag:'\u{1F1E6}\u{1F1FF}',region:'easteurope',co:{h:55,w:40,d:20,kg:8},pi:null,note:'Azerbaycan ulusal'},
+      {id:183,name:'Air Astana',iata:'KC',country:'Kazakistan',flag:'\u{1F1F0}\u{1F1FF}',region:'easteurope',co:{h:55,w:40,d:23,kg:8},pi:null,note:'Kazakistan ulusal'},
+      {id:184,name:'Georgian Airways',iata:'A9',country:'Gürcistan',flag:'\u{1F1EC}\u{1F1EA}',region:'easteurope',co:{h:55,w:40,d:20,kg:8},pi:null,note:'Gürcistan ulusal'},
+      {id:185,name:'Wizz Air Abu Dhabi',iata:'5W',country:'BAE',flag:'\u{1F1E6}\u{1F1EA}',region:'middleeast',co:{h:55,w:40,d:20,kg:10},pi:{h:40,w:30,d:20},note:'Abu Dhabi dü\u015fük maliyet'}
     ];
 
-    const regions = {
-      all:{label:'Tümü',icon:'🌍'},
-      turkey:{label:'Türkiye',icon:'🇹🇷'},
-      europe:{label:'Avrupa',icon:'🇪🇺'},
-      lowcost:{label:'Düşük Maliyet',icon:'✈️'},
-      northamerica:{label:'K. Amerika',icon:'🇺🇸'},
-      middleeast:{label:'Orta Doğu',icon:'🌙'},
-      asia:{label:'Asya',icon:'🌏'},
-      oceania:{label:'Okyanusya',icon:'🌊'},
-      southamerica:{label:'G. Amerika',icon:'🌎'},
-      africa:{label:'Afrika',icon:'🌍'},
-      easteurope:{label:'Doğu Avrupa',icon:'🔷'},
+    var regions = {
+      all:{label:'Tümü',icon:'\u{1F30D}'},
+      turkey:{label:'Türkiye',icon:'\u{1F1F9}\u{1F1F7}'},
+      europe:{label:'Avrupa',icon:'\u{1F1EA}\u{1F1FA}'},
+      lowcost:{label:'Dü\u015fük Maliyet',icon:'\u2708\uFE0F'},
+      northamerica:{label:'K. Amerika',icon:'\u{1F1FA}\u{1F1F8}'},
+      middleeast:{label:'Orta Do\u011fu',icon:'\u{1F319}'},
+      asia:{label:'Asya',icon:'\u{1F30F}'},
+      oceania:{label:'Okyanusya',icon:'\u{1F30A}'},
+      southamerica:{label:'G. Amerika',icon:'\u{1F30E}'},
+      africa:{label:'Afrika',icon:'\u{1F30D}'},
+      easteurope:{label:'Do\u011fu Avrupa',icon:'\u{1F537}'}
     };
 
-    function App() {
-      const [step, setStep] = useState(1);
-      const [dims, setDims] = useState({h:'',w:'',d:'',kg:''});
-      const [softBag, setSoftBag] = useState(false);
-      const [selMode, setSelMode] = useState('all');
-      const [selAirlines, setSelAirlines] = useState(new Set());
-      const [search, setSearch] = useState('');
-      const [regionFilter, setRegionFilter] = useState('all');
-      const [sortBy, setSortBy] = useState('fit');
-      const [showResults, setShowResults] = useState(false);
+    // ===== STATE =====
+    var state = {
+      step: 1,
+      dims: {h:'', w:'', d:'', kg:''},
+      softBag: false,
+      selMode: 'all',
+      selAirlines: {},
+      selCount: 0,
+      search: '',
+      regionFilter: 'all',
+      sortBy: 'fit',
+      showResults: false
+    };
 
-      const tolerance = softBag ? 2 : 0;
+    // ===== HELPERS =====
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
-      const filteredForSelect = useMemo(() => {
-        return airlines.filter(a => {
-          const mr = regionFilter === 'all' || a.region === regionFilter;
-          const ms = !search || a.name.toLowerCase().includes(search.toLowerCase()) || a.iata.toLowerCase().includes(search.toLowerCase()) || a.country.toLowerCase().includes(search.toLowerCase());
-          return mr && ms;
-        });
-      }, [regionFilter, search]);
+    function barColor(pct) { return pct >= 100 ? 'green' : pct >= 90 ? 'amber' : 'red'; }
 
-      const toggleAirline = useCallback((id) => {
-        setSelAirlines(prev => {
-          const next = new Set(prev);
-          if (next.has(id)) next.delete(id); else next.add(id);
-          return next;
-        });
-      }, []);
+    var statusMap = {
+      fit: {badge:'Uygun', cls:'fit'},
+      weight: {badge:'A\u011f\u0131rl\u0131k A\u015f\u0131m\u0131', cls:'tight'},
+      personal: {badge:'Ki\u015fisel E\u015fya', cls:'personal'},
+      tight: {badge:'S\u0131k\u0131 Uyum', cls:'tight'},
+      nofit: {badge:'Uygun De\u011fil', cls:'nofit'}
+    };
 
-      const selectAllVisible = useCallback(() => {
-        setSelAirlines(prev => {
-          const next = new Set(prev);
-          filteredForSelect.forEach(a => next.add(a.id));
-          return next;
-        });
-      }, [filteredForSelect]);
-
-      const clearAll = useCallback(() => setSelAirlines(new Set()), []);
-
-      const canCheck = dims.h && dims.w && dims.d && (selMode === 'all' || selAirlines.size > 0);
-
-      const fitsWithTolerance = useCallback((bagVal, limitVal) => bagVal <= limitVal + tolerance, [tolerance]);
-
-      const calcPct = useCallback((bag, limit) => {
-        if (!limit) return null;
-        const hP = Math.min(100, ((limit.h + tolerance) / bag.h) * 100);
-        const wP = Math.min(100, ((limit.w + tolerance) / bag.w) * 100);
-        const dP = Math.min(100, ((limit.d + tolerance) / bag.d) * 100);
-        return Math.round((hP + wP + dP) / 3);
-      }, [tolerance]);
-
-      const results = useMemo(() => {
-        if (!showResults || !dims.h || !dims.w || !dims.d) return null;
-        const bag = {h:parseFloat(dims.h), w:parseFloat(dims.w), d:parseFloat(dims.d)};
-        const bagKg = dims.kg ? parseFloat(dims.kg) : null;
-
-        let pool = selMode === 'all' ? airlines : airlines.filter(a => selAirlines.has(a.id));
-
-        return pool.map(a => {
-          const coFits = fitsWithTolerance(bag.h, a.co.h) && fitsWithTolerance(bag.w, a.co.w) && fitsWithTolerance(bag.d, a.co.d);
-          const piFits = a.pi ? fitsWithTolerance(bag.h, a.pi.h) && fitsWithTolerance(bag.w, a.pi.w) && fitsWithTolerance(bag.d, a.pi.d) : false;
-          const wOk = !a.co.kg || !bagKg || bagKg <= a.co.kg;
-          const coPct = calcPct(bag, a.co);
-          const piPct = calcPct(bag, a.pi);
-
-          let status;
-          if (coFits && wOk) status = 'fit';
-          else if (coFits && !wOk) status = 'weight';
-          else if (piFits) status = 'personal';
-          else if (coPct >= 96) status = 'tight';
-          else status = 'nofit';
-
-          return {...a, coFits, piFits, wOk, coPct, piPct, status, bagKg};
-        }).sort((a,b) => {
-          if (sortBy === 'fit') return (b.coPct||0) - (a.coPct||0);
-          return a.name.localeCompare(b.name);
-        });
-      }, [showResults, dims, selMode, selAirlines, sortBy, fitsWithTolerance, calcPct]);
-
-      const stats = useMemo(() => {
-        if (!results) return null;
-        const fit = results.filter(r => r.status==='fit').length;
-        const tight = results.filter(r => r.status==='tight'||r.status==='weight').length;
-        const personal = results.filter(r => r.status==='personal').length;
-        const nofit = results.filter(r => r.status==='nofit').length;
-        return {fit, tight, personal, nofit, total: results.length};
-      }, [results]);
-
-      const handleCheck = () => { if (canCheck) { setShowResults(true); setStep(3); } };
-
-      const barColor = (pct) => pct >= 100 ? 'green' : pct >= 90 ? 'amber' : 'red';
-
-      const statusMap = {
-        fit: {badge:'Uygun', cls:'fit', icon:'✓'},
-        weight: {badge:'Ağırlık Aşımı', cls:'tight', icon:'!'},
-        personal: {badge:'Kişisel Eşya', cls:'personal', icon:'↓'},
-        tight: {badge:'Sıkı Uyum', cls:'tight', icon:'~'},
-        nofit: {badge:'Uygun Değil', cls:'nofit', icon:'✕'},
-      };
-
-      return (
-        <div>
-          <nav>
-            <div className="nav-inner">
-              <div className="nav-logo"><span className="dot"></span> KabinBagaj</div>
-              <div className="nav-badge">{airlines.length} havayolu</div>
-            </div>
-          </nav>
-
-          {!showResults && (
-            <section className="hero fade-up">
-              <div className="container">
-                <div className="hero-tag">✦ {airlines.length} havayolu veritabanı</div>
-                <h1>Bagajınız kabine<br/><span className="gradient">sığar mı?</span></h1>
-                <p className="hero-sub">Boyutlarınızı girin, havayollarınızı seçin, anında öğrenin.</p>
-              </div>
-            </section>
-          )}
-
-          {!showResults && (
-            <div className="container">
-              {/* Step tabs */}
-              <div className="steps fade-up delay-1">
-                <button className={`step-btn ${step>=1?'active':''} ${step>1?'done':''}`} onClick={()=>setStep(1)}>
-                  <span className="step-num">{step>1?'✓':'1'}</span> Boyutlar
-                </button>
-                <button className={`step-btn ${step===2?'active':''}`} onClick={()=>{if(dims.h&&dims.w&&dims.d) setStep(2)}}>
-                  <span className="step-num">2</span> Havayolları
-                </button>
-              </div>
-
-              {/* Step 1: Dimensions */}
-              {step === 1 && (
-                <div className="fade-up delay-2">
-                  <div className="bento-card">
-                    <h3>📐 Bagaj Boyutları</h3>
-                    <div className="subtitle">Tekerlekler ve saplar dahil ölçün</div>
-                    <div className="dim-grid four">
-                      <div className="dim-input">
-                        <label>Yükseklik</label>
-                        <input type="number" placeholder="55" value={dims.h} onChange={e=>setDims(p=>({...p,h:e.target.value}))} />
-                        <span className="unit">cm</span>
-                      </div>
-                      <div className="dim-input">
-                        <label>Genişlik</label>
-                        <input type="number" placeholder="40" value={dims.w} onChange={e=>setDims(p=>({...p,w:e.target.value}))} />
-                        <span className="unit">cm</span>
-                      </div>
-                      <div className="dim-input">
-                        <label>Derinlik</label>
-                        <input type="number" placeholder="23" value={dims.d} onChange={e=>setDims(p=>({...p,d:e.target.value}))} />
-                        <span className="unit">cm</span>
-                      </div>
-                      <div className="dim-input">
-                        <label>Ağırlık</label>
-                        <input type="number" placeholder="—" value={dims.kg} onChange={e=>setDims(p=>({...p,kg:e.target.value}))} />
-                        <span className="unit">kg</span>
-                      </div>
-                    </div>
-                    <label className="soft-toggle">
-                      <input type="checkbox" checked={softBag} onChange={e=>setSoftBag(e.target.checked)} />
-                      Yumuşak çanta (+2 cm tolerans)
-                    </label>
-                  </div>
-                  <div className="cta-wrap">
-                    <button className="cta-btn" disabled={!dims.h||!dims.w||!dims.d} onClick={()=>setStep(2)}>
-                      Devam → Havayolu Seç
-                      <span className="shine"></span>
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* Step 2: Airline Selection */}
-              {step === 2 && (
-                <div className="fade-up delay-1">
-                  <div className="airline-selector">
-                    <div className="mode-toggle">
-                      <button className={`mode-btn ${selMode==='all'?'active':''}`} onClick={()=>setSelMode('all')}>
-                        🌍 Tüm Havayolları
-                      </button>
-                      <button className={`mode-btn ${selMode==='select'?'active':''}`} onClick={()=>setSelMode('select')}>
-                        ✋ Seçerek Kontrol
-                      </button>
-                    </div>
-
-                    {selMode === 'select' && (
-                      <>
-                        <div className="search-box">
-                          <span className="search-icon">🔍</span>
-                          <input type="text" placeholder="Havayolu, IATA kodu veya ülke ara..." value={search} onChange={e=>setSearch(e.target.value)} />
-                        </div>
-                        <div className="region-chips">
-                          {Object.entries(regions).map(([k,v]) => (
-                            <button key={k} className={`chip ${regionFilter===k?'active':''}`} onClick={()=>setRegionFilter(k)}>
-                              {v.icon} {v.label}
-                            </button>
-                          ))}
-                        </div>
-                        <div className="select-all-bar">
-                          <span>{selAirlines.size} havayolu seçildi</span>
-                          <div>
-                            <button onClick={selectAllVisible}>Tümünü seç</button>
-                            {' · '}
-                            <button onClick={clearAll}>Temizle</button>
-                          </div>
-                        </div>
-                        <div className="airline-list">
-                          {filteredForSelect.map(a => (
-                            <div key={a.id} className={`airline-row ${selAirlines.has(a.id)?'selected':''}`} onClick={()=>toggleAirline(a.id)}>
-                              <div className="airline-check">{selAirlines.has(a.id) ? '✓' : ''}</div>
-                              <span className="airline-flag">{a.flag}</span>
-                              <div className="airline-info">
-                                <div className="airline-name-row">{a.name}</div>
-                                <div className="airline-meta">{a.country}</div>
-                              </div>
-                              <span className="airline-iata">{a.iata}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </>
-                    )}
-
-                    {selMode === 'all' && (
-                      <div style={{padding:'24px', textAlign:'center', color:'var(--text-secondary)', fontSize:'14px'}}>
-                        <div style={{fontSize:'48px', marginBottom:'12px'}}>🌐</div>
-                        Tüm <strong>{airlines.length}</strong> havayolu otomatik kontrol edilecek
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="cta-wrap">
-                    <button className="cta-btn" disabled={!canCheck} onClick={handleCheck}>
-                      {selMode === 'all'
-                        ? `${airlines.length} Havayolunu Kontrol Et`
-                        : `${selAirlines.size} Havayolunu Kontrol Et`}
-                      <span className="shine"></span>
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* RESULTS */}
-          {showResults && results && (
-            <div className="container results fade-up">
-              <div style={{textAlign:'center', margin:'32px 0'}}>
-                <button onClick={()=>{setShowResults(false); setStep(1);}} style={{background:'none',border:'1px solid var(--glass-border)',color:'var(--text-secondary)',padding:'8px 20px',borderRadius:'100px',cursor:'pointer',fontSize:'13px',fontWeight:'600',transition:'all 0.2s'}}>← Yeni Kontrol</button>
-              </div>
-
-              <div className="results-header">
-                <div>
-                  <div className="results-title">Sonuçlar</div>
-                  <div className="results-dims">{dims.h} × {dims.w} × {dims.d} cm {dims.kg ? `· ${dims.kg} kg` : ''} {softBag ? '· yumuşak çanta' : ''}</div>
-                </div>
-              </div>
-
-              <div className="stats-bento">
-                <div className="stat-card green fade-up delay-1">
-                  <div className="stat-value">{stats.fit}</div>
-                  <div className="stat-label">Uygun</div>
-                </div>
-                <div className="stat-card fade-up delay-2" style={{'--stat-color':'var(--blue)'}}>
-                  <div className="stat-value" style={{color:'var(--blue)'}}>{stats.personal}</div>
-                  <div className="stat-label">Kişisel Eşya</div>
-                </div>
-                <div className="stat-card amber fade-up delay-3">
-                  <div className="stat-value">{stats.tight}</div>
-                  <div className="stat-label">Sıkı / Ağır</div>
-                </div>
-                <div className="stat-card red fade-up delay-4">
-                  <div className="stat-value">{stats.nofit}</div>
-                  <div className="stat-label">Uygun Değil</div>
-                </div>
-              </div>
-
-              <div className="sort-bar">
-                <div className="left">{results.length} havayolu</div>
-                <div className="sort-pills">
-                  <button className={`sort-pill ${sortBy==='fit'?'active':''}`} onClick={()=>setSortBy('fit')}>Uyumluluk</button>
-                  <button className={`sort-pill ${sortBy==='name'?'active':''}`} onClick={()=>setSortBy('name')}>A → Z</button>
-                </div>
-              </div>
-
-              <div className="result-grid">
-                {results.map(a => {
-                  const sm = statusMap[a.status];
-                  const coColor = barColor(a.coPct);
-                  return (
-                    <div key={a.id} className={`result-card ${sm.cls}`}>
-                      <div className="rc-top">
-                        <div className="rc-airline">
-                          <span className="rc-flag">{a.flag}</span>
-                          <div>
-                            <div className="rc-name">{a.name}</div>
-                            <div className="rc-meta-line">
-                              <span className="rc-iata">{a.iata}</span>
-                              <span className="rc-country">{a.country}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <span className={`rc-badge ${sm.cls}`}>{sm.badge}</span>
-                      </div>
-
-                      <div className="rc-bars">
-                        <div className="rc-bar">
-                          <div className="rc-bar-header">
-                            <span className="rc-bar-label">Carry-on uyum</span>
-                            <span className={`rc-bar-val ${coColor}`}>{a.coPct}%</span>
-                          </div>
-                          <div className="rc-bar-track">
-                            <div className={`rc-bar-fill ${coColor}`} style={{width:`${Math.min(100,a.coPct)}%`}}></div>
-                          </div>
-                        </div>
-                        {a.piPct !== null && (
-                          <div className="rc-bar">
-                            <div className="rc-bar-header">
-                              <span className="rc-bar-label">Kişisel eşya</span>
-                              <span className={`rc-bar-val blue`}>{a.piPct}%</span>
-                            </div>
-                            <div className="rc-bar-track">
-                              <div className="rc-bar-fill blue" style={{width:`${Math.min(100,a.piPct)}%`}}></div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-
-                      {a.status === 'weight' && (
-                        <div className="rc-weight-warn">⚠ Boyut uygun — ağırlık aşımı ({a.co.kg} kg max)</div>
-                      )}
-
-                      <div className="rc-footer">
-                        <div className="rc-dims">
-                          <span>📐 {a.co.h}×{a.co.w}×{a.co.d}</span>
-                          <span>{a.co.kg ? `⚖ ${a.co.kg}kg` : '⚖ ∞'}</span>
-                        </div>
-                        <div className="rc-note" title={a.note}>{a.note}</div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          <footer>
-            <div className="container">
-              <div className="disclaimer">⚠️ Bu bilgiler genel rehberlik amaçlıdır. Havayolu kuralları tarife, rota ve uçak tipine göre değişebilir. Seyahat öncesi resmi web sitesini kontrol edin.</div>
-              <p>© 2026 KabinBagaj — <a href="https://kraftcover.shop" target="_blank" style="color:var(--accent);text-decoration:none">KraftCover</a> tarafından desteklenmektedir</p>
-            </div>
-          </footer>
-        </div>
-      );
+    function getFilteredAirlines() {
+      return airlines.filter(function(a) {
+        var mr = state.regionFilter === 'all' || a.region === state.regionFilter;
+        var q = state.search.toLowerCase();
+        var ms = !q || a.name.toLowerCase().indexOf(q) !== -1 || a.iata.toLowerCase().indexOf(q) !== -1 || a.country.toLowerCase().indexOf(q) !== -1;
+        return mr && ms;
+      });
     }
 
-    ReactDOM.render(<App />, document.getElementById('root'));
+    function computeResults() {
+      var d = state.dims;
+      if (!d.h || !d.w || !d.d) return [];
+      var bag = {h: parseFloat(d.h), w: parseFloat(d.w), d: parseFloat(d.d)};
+      var bagKg = d.kg ? parseFloat(d.kg) : null;
+      var tol = state.softBag ? 2 : 0;
+      var pool = state.selMode === 'all' ? airlines : airlines.filter(function(a) { return state.selAirlines[a.id]; });
+
+      return pool.map(function(a) {
+        var coFits = bag.h <= a.co.h + tol && bag.w <= a.co.w + tol && bag.d <= a.co.d + tol;
+        var piFits = a.pi ? (bag.h <= a.pi.h + tol && bag.w <= a.pi.w + tol && bag.d <= a.pi.d + tol) : false;
+        var wOk = !a.co.kg || !bagKg || bagKg <= a.co.kg;
+
+        var coPct = null;
+        if (a.co) {
+          var hP = Math.min(100, ((a.co.h + tol) / bag.h) * 100);
+          var wP = Math.min(100, ((a.co.w + tol) / bag.w) * 100);
+          var dP = Math.min(100, ((a.co.d + tol) / bag.d) * 100);
+          coPct = Math.round((hP + wP + dP) / 3);
+        }
+        var piPct = null;
+        if (a.pi) {
+          var hP2 = Math.min(100, ((a.pi.h + tol) / bag.h) * 100);
+          var wP2 = Math.min(100, ((a.pi.w + tol) / bag.w) * 100);
+          var dP2 = Math.min(100, ((a.pi.d + tol) / bag.d) * 100);
+          piPct = Math.round((hP2 + wP2 + dP2) / 3);
+        }
+
+        var status;
+        if (coFits && wOk) status = 'fit';
+        else if (coFits && !wOk) status = 'weight';
+        else if (piFits) status = 'personal';
+        else if (coPct >= 96) status = 'tight';
+        else status = 'nofit';
+
+        return {id:a.id, name:a.name, iata:a.iata, country:a.country, flag:a.flag, co:a.co, pi:a.pi, note:a.note, coFits:coFits, piFits:piFits, wOk:wOk, coPct:coPct, piPct:piPct, status:status};
+      }).sort(function(a,b) {
+        if (state.sortBy === 'fit') return (b.coPct||0) - (a.coPct||0);
+        return a.name.localeCompare(b.name);
+      });
+    }
+
+    // ===== RENDER =====
+    function render() {
+      var root = document.getElementById('root');
+      var html = '';
+
+      // Nav
+      html += '<nav><div class="nav-inner"><div class="nav-logo"><span class="dot"></span> KabinBagaj</div><div class="nav-badge">' + airlines.length + ' havayolu</div></div></nav>';
+
+      if (!state.showResults) {
+        // Hero
+        html += '<section class="hero fade-up"><div class="container">';
+        html += '<div class="hero-tag">\u2726 ' + airlines.length + ' havayolu veritaban\u0131</div>';
+        html += '<h1>Bagaj\u0131n\u0131z kabine<br><span class="gradient">s\u0131\u011far m\u0131?</span></h1>';
+        html += '<p class="hero-sub">Boyutlar\u0131n\u0131z\u0131 girin, havayollar\u0131n\u0131z\u0131 seçin, an\u0131nda ö\u011frenin.</p>';
+        html += '</div></section>';
+
+        // Wizard
+        html += '<div class="container">';
+
+        // Step tabs
+        html += '<div class="steps fade-up delay-1">';
+        html += '<button class="step-btn ' + (state.step >= 1 ? 'active' : '') + (state.step > 1 ? ' done' : '') + '" data-action="goStep1"><span class="step-num">' + (state.step > 1 ? '\u2713' : '1') + '</span> Boyutlar</button>';
+        html += '<button class="step-btn ' + (state.step === 2 ? 'active' : '') + '" data-action="goStep2"><span class="step-num">2</span> Havayollar\u0131</button>';
+        html += '</div>';
+
+        // Step 1
+        if (state.step === 1) {
+          html += '<div class="fade-up delay-2"><div class="bento-card">';
+          html += '<h3>\u{1F4D0} Bagaj Boyutlar\u0131</h3>';
+          html += '<div class="subtitle">Tekerlekler ve saplar dahil ölçün</div>';
+          html += '<div class="dim-grid four">';
+          html += '<div class="dim-input"><label>Yükseklik</label><input type="number" placeholder="55" id="dimH" value="' + esc(state.dims.h) + '"><span class="unit">cm</span></div>';
+          html += '<div class="dim-input"><label>Geni\u015flik</label><input type="number" placeholder="40" id="dimW" value="' + esc(state.dims.w) + '"><span class="unit">cm</span></div>';
+          html += '<div class="dim-input"><label>Derinlik</label><input type="number" placeholder="23" id="dimD" value="' + esc(state.dims.d) + '"><span class="unit">cm</span></div>';
+          html += '<div class="dim-input"><label>A\u011f\u0131rl\u0131k</label><input type="number" placeholder="\u2014" id="dimKg" value="' + esc(state.dims.kg) + '"><span class="unit">kg</span></div>';
+          html += '</div>';
+          html += '<label class="soft-toggle"><input type="checkbox" id="softBag"' + (state.softBag ? ' checked' : '') + '> Yumu\u015fak çanta (+2 cm tolerans)</label>';
+          html += '</div>';
+          html += '<div class="cta-wrap"><button class="cta-btn" data-action="toStep2"' + (!state.dims.h || !state.dims.w || !state.dims.d ? ' disabled' : '') + '>Devam \u2192 Havayolu Seç<span class="shine"></span></button></div>';
+          html += '</div>';
+        }
+
+        // Step 2
+        if (state.step === 2) {
+          html += '<div class="fade-up delay-1"><div class="airline-selector">';
+          html += '<div class="mode-toggle">';
+          html += '<button class="mode-btn ' + (state.selMode === 'all' ? 'active' : '') + '" data-action="modeAll">\u{1F30D} Tüm Havayollar\u0131</button>';
+          html += '<button class="mode-btn ' + (state.selMode === 'select' ? 'active' : '') + '" data-action="modeSelect">\u270B Seçerek Kontrol</button>';
+          html += '</div>';
+
+          if (state.selMode === 'select') {
+            html += '<div class="search-box"><span class="search-icon">\u{1F50D}</span><input type="text" placeholder="Havayolu, IATA kodu veya ülke ara..." id="airlineSearch" value="' + esc(state.search) + '"></div>';
+
+            html += '<div class="region-chips">';
+            Object.keys(regions).forEach(function(k) {
+              var v = regions[k];
+              html += '<button class="chip ' + (state.regionFilter === k ? 'active' : '') + '" data-region="' + k + '">' + v.icon + ' ' + v.label + '</button>';
+            });
+            html += '</div>';
+
+            html += '<div class="select-all-bar"><span>' + state.selCount + ' havayolu seçildi</span><div><button data-action="selectAll">Tümünü seç</button> \u00b7 <button data-action="clearAll">Temizle</button></div></div>';
+
+            var filtered = getFilteredAirlines();
+            html += '<div class="airline-list">';
+            filtered.forEach(function(a) {
+              var sel = state.selAirlines[a.id];
+              html += '<div class="airline-row ' + (sel ? 'selected' : '') + '" data-airline="' + a.id + '">';
+              html += '<div class="airline-check">' + (sel ? '\u2713' : '') + '</div>';
+              html += '<span class="airline-flag">' + a.flag + '</span>';
+              html += '<div class="airline-info"><div class="airline-name-row">' + esc(a.name) + '</div><div class="airline-meta">' + esc(a.country) + '</div></div>';
+              html += '<span class="airline-iata">' + a.iata + '</span>';
+              html += '</div>';
+            });
+            html += '</div>';
+          } else {
+            html += '<div style="padding:24px;text-align:center;color:var(--text-secondary);font-size:14px"><div style="font-size:48px;margin-bottom:12px">\u{1F310}</div>Tüm <strong>' + airlines.length + '</strong> havayolu otomatik kontrol edilecek</div>';
+          }
+          html += '</div>';
+
+          var canCheck = state.dims.h && state.dims.w && state.dims.d && (state.selMode === 'all' || state.selCount > 0);
+          var label = state.selMode === 'all' ? airlines.length + ' Havayolunu Kontrol Et' : state.selCount + ' Havayolunu Kontrol Et';
+          html += '<div class="cta-wrap"><button class="cta-btn" data-action="check"' + (!canCheck ? ' disabled' : '') + '>' + label + '<span class="shine"></span></button></div>';
+          html += '</div>';
+        }
+
+        html += '</div>'; // container
+      } else {
+        // Results
+        var results = computeResults();
+        var fit = 0, tight = 0, personal = 0, nofit = 0;
+        results.forEach(function(r) {
+          if (r.status === 'fit') fit++;
+          else if (r.status === 'tight' || r.status === 'weight') tight++;
+          else if (r.status === 'personal') personal++;
+          else nofit++;
+        });
+
+        html += '<div class="container results fade-up">';
+        html += '<div style="text-align:center;margin:32px 0"><button data-action="reset" style="background:none;border:1px solid var(--glass-border);color:var(--text-secondary);padding:8px 20px;border-radius:100px;cursor:pointer;font-size:13px;font-weight:600;transition:all 0.2s">\u2190 Yeni Kontrol</button></div>';
+
+        html += '<div class="results-header"><div><div class="results-title">Sonuçlar</div>';
+        html += '<div class="results-dims">' + esc(state.dims.h) + ' \u00d7 ' + esc(state.dims.w) + ' \u00d7 ' + esc(state.dims.d) + ' cm' + (state.dims.kg ? ' \u00b7 ' + esc(state.dims.kg) + ' kg' : '') + (state.softBag ? ' \u00b7 yumu\u015fak çanta' : '') + '</div></div></div>';
+
+        html += '<div class="stats-bento">';
+        html += '<div class="stat-card green fade-up delay-1"><div class="stat-value">' + fit + '</div><div class="stat-label">Uygun</div></div>';
+        html += '<div class="stat-card fade-up delay-2"><div class="stat-value" style="color:var(--blue)">' + personal + '</div><div class="stat-label">Ki\u015fisel E\u015fya</div></div>';
+        html += '<div class="stat-card amber fade-up delay-3"><div class="stat-value">' + tight + '</div><div class="stat-label">S\u0131k\u0131 / A\u011f\u0131r</div></div>';
+        html += '<div class="stat-card red fade-up delay-4"><div class="stat-value">' + nofit + '</div><div class="stat-label">Uygun De\u011fil</div></div>';
+        html += '</div>';
+
+        html += '<div class="sort-bar"><div class="left">' + results.length + ' havayolu</div><div class="sort-pills">';
+        html += '<button class="sort-pill ' + (state.sortBy === 'fit' ? 'active' : '') + '" data-sort="fit">Uyumluluk</button>';
+        html += '<button class="sort-pill ' + (state.sortBy === 'name' ? 'active' : '') + '" data-sort="name">A \u2192 Z</button>';
+        html += '</div></div>';
+
+        html += '<div class="result-grid">';
+        results.forEach(function(a) {
+          var sm = statusMap[a.status];
+          var coC = barColor(a.coPct);
+          html += '<div class="result-card ' + sm.cls + '">';
+          html += '<div class="rc-top"><div class="rc-airline"><span class="rc-flag">' + a.flag + '</span><div><div class="rc-name">' + esc(a.name) + '</div><div class="rc-meta-line"><span class="rc-iata">' + a.iata + '</span><span class="rc-country">' + esc(a.country) + '</span></div></div></div>';
+          html += '<span class="rc-badge ' + sm.cls + '">' + sm.badge + '</span></div>';
+
+          html += '<div class="rc-bars"><div class="rc-bar"><div class="rc-bar-header"><span class="rc-bar-label">Carry-on uyum</span><span class="rc-bar-val ' + coC + '">' + a.coPct + '%</span></div>';
+          html += '<div class="rc-bar-track"><div class="rc-bar-fill ' + coC + '" style="width:' + Math.min(100, a.coPct) + '%"></div></div></div>';
+
+          if (a.piPct !== null) {
+            html += '<div class="rc-bar"><div class="rc-bar-header"><span class="rc-bar-label">Ki\u015fisel e\u015fya</span><span class="rc-bar-val blue">' + a.piPct + '%</span></div>';
+            html += '<div class="rc-bar-track"><div class="rc-bar-fill blue" style="width:' + Math.min(100, a.piPct) + '%"></div></div></div>';
+          }
+          html += '</div>';
+
+          if (a.status === 'weight') {
+            html += '<div class="rc-weight-warn">\u26A0 Boyut uygun \u2014 a\u011f\u0131rl\u0131k a\u015f\u0131m\u0131 (' + a.co.kg + ' kg max)</div>';
+          }
+
+          html += '<div class="rc-footer"><div class="rc-dims"><span>\u{1F4D0} ' + a.co.h + '\u00d7' + a.co.w + '\u00d7' + a.co.d + '</span><span>' + (a.co.kg ? '\u2696 ' + a.co.kg + 'kg' : '\u2696 \u221E') + '</span></div>';
+          html += '<div class="rc-note" title="' + esc(a.note) + '">' + esc(a.note) + '</div></div>';
+          html += '</div>';
+        });
+        html += '</div></div>';
+      }
+
+      // Footer
+      html += '<footer><div class="container">';
+      html += '<div class="disclaimer">\u26A0\uFE0F Bu bilgiler genel rehberlik amaçl\u0131d\u0131r. Havayolu kurallar\u0131 tarife, rota ve uçak tipine göre de\u011fi\u015febilir. Seyahat öncesi resmi web sitesini kontrol edin.</div>';
+      html += '<p>\u00a9 2026 KabinBagaj \u2014 <a href="https://kraftcover.shop" target="_blank" style="color:var(--accent);text-decoration:none">KraftCover</a> taraf\u0131ndan desteklenmektedir</p>';
+      html += '</div></footer>';
+
+      root.innerHTML = html;
+      attachListeners();
+    }
+
+    // ===== EVENT LISTENERS =====
+    function attachListeners() {
+      // Dimension inputs
+      var dimH = document.getElementById('dimH');
+      var dimW = document.getElementById('dimW');
+      var dimD = document.getElementById('dimD');
+      var dimKg = document.getElementById('dimKg');
+      var soft = document.getElementById('softBag');
+      var srch = document.getElementById('airlineSearch');
+
+      if (dimH) dimH.addEventListener('input', function() { state.dims.h = this.value; updateCtaState(); });
+      if (dimW) dimW.addEventListener('input', function() { state.dims.w = this.value; updateCtaState(); });
+      if (dimD) dimD.addEventListener('input', function() { state.dims.d = this.value; updateCtaState(); });
+      if (dimKg) dimKg.addEventListener('input', function() { state.dims.kg = this.value; });
+      if (soft) soft.addEventListener('change', function() { state.softBag = this.checked; });
+      if (srch) srch.addEventListener('input', function() { state.search = this.value; renderAirlineList(); });
+
+      // Delegated clicks
+      document.getElementById('root').addEventListener('click', handleClick);
+    }
+
+    function updateCtaState() {
+      var btn = document.querySelector('[data-action="toStep2"]');
+      if (btn) btn.disabled = !state.dims.h || !state.dims.w || !state.dims.d;
+    }
+
+    function renderAirlineList() {
+      var list = document.querySelector('.airline-list');
+      if (!list) return;
+      var filtered = getFilteredAirlines();
+      var html = '';
+      filtered.forEach(function(a) {
+        var sel = state.selAirlines[a.id];
+        html += '<div class="airline-row ' + (sel ? 'selected' : '') + '" data-airline="' + a.id + '">';
+        html += '<div class="airline-check">' + (sel ? '\u2713' : '') + '</div>';
+        html += '<span class="airline-flag">' + a.flag + '</span>';
+        html += '<div class="airline-info"><div class="airline-name-row">' + esc(a.name) + '</div><div class="airline-meta">' + esc(a.country) + '</div></div>';
+        html += '<span class="airline-iata">' + a.iata + '</span>';
+        html += '</div>';
+      });
+      list.innerHTML = html;
+    }
+
+    function updateSelCount() {
+      state.selCount = Object.keys(state.selAirlines).filter(function(k) { return state.selAirlines[k]; }).length;
+      var span = document.querySelector('.select-all-bar span');
+      if (span) span.textContent = state.selCount + ' havayolu seçildi';
+      var checkBtn = document.querySelector('[data-action="check"]');
+      if (checkBtn) {
+        var canCheck = state.dims.h && state.dims.w && state.dims.d && (state.selMode === 'all' || state.selCount > 0);
+        checkBtn.disabled = !canCheck;
+        checkBtn.textContent = state.selMode === 'all' ? airlines.length + ' Havayolunu Kontrol Et' : state.selCount + ' Havayolunu Kontrol Et';
+      }
+    }
+
+    function handleClick(e) {
+      var target = e.target;
+
+      // Find closest element with data-action or data attributes
+      var actionEl = target.closest('[data-action]');
+      var airlineEl = target.closest('[data-airline]');
+      var regionEl = target.closest('[data-region]');
+      var sortEl = target.closest('[data-sort]');
+
+      if (actionEl) {
+        var action = actionEl.getAttribute('data-action');
+        switch(action) {
+          case 'goStep1': state.step = 1; render(); break;
+          case 'goStep2':
+            if (state.dims.h && state.dims.w && state.dims.d) { state.step = 2; render(); }
+            break;
+          case 'toStep2':
+            if (state.dims.h && state.dims.w && state.dims.d) { state.step = 2; render(); }
+            break;
+          case 'modeAll': state.selMode = 'all'; render(); break;
+          case 'modeSelect': state.selMode = 'select'; render(); break;
+          case 'selectAll':
+            getFilteredAirlines().forEach(function(a) { state.selAirlines[a.id] = true; });
+            updateSelCount();
+            renderAirlineList();
+            break;
+          case 'clearAll':
+            state.selAirlines = {};
+            state.selCount = 0;
+            updateSelCount();
+            renderAirlineList();
+            break;
+          case 'check':
+            if (!actionEl.disabled) { state.showResults = true; state.step = 3; render(); window.scrollTo(0,0); }
+            break;
+          case 'reset':
+            state.showResults = false; state.step = 1; render(); window.scrollTo(0,0);
+            break;
+        }
+      } else if (airlineEl) {
+        var id = parseInt(airlineEl.getAttribute('data-airline'));
+        state.selAirlines[id] = !state.selAirlines[id];
+        if (!state.selAirlines[id]) delete state.selAirlines[id];
+        updateSelCount();
+        // Toggle class directly for performance
+        airlineEl.classList.toggle('selected');
+        var check = airlineEl.querySelector('.airline-check');
+        if (check) check.textContent = state.selAirlines[id] ? '\u2713' : '';
+      } else if (regionEl) {
+        state.regionFilter = regionEl.getAttribute('data-region');
+        document.querySelectorAll('.chip').forEach(function(c) { c.classList.toggle('active', c.getAttribute('data-region') === state.regionFilter); });
+        renderAirlineList();
+      } else if (sortEl) {
+        state.sortBy = sortEl.getAttribute('data-sort');
+        render();
+      }
+    }
+
+    // ===== INIT =====
+    render();
   </script>
 </body>
 </html>
